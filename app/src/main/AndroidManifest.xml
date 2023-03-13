@@ -15,7 +15,13 @@
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="false"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.Kitchen_Master.NoActionBar" />
+        <activity
+            android:name=".StartSplash"
+            android:exported="true"
+            android:theme="@style/Theme.Kitchen_Master.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
