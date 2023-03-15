@@ -11,4 +11,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="nav_main_string">Главная</string>
+    <string name="nav_fridge_string">Холодильник</string>
+    <string name="nav_recipes_string">Рецепты</string>
 </resources>

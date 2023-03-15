@@ -9,14 +9,28 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.Kitchen_Master.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        app:elevation="0dp"
+        android:theme="@style/Theme.Kitchen_Master.AppBarOverlay"
+        android:background="?attr/pagesBackColor">
+    
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.Kitchen_Master.PopupOverlay" />
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:elevation="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/toolbarform"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:theme="@style/Theme.Kitchen_Master.NoActionBar"
+                app:popupTheme="@style/Theme.Kitchen_Master.PopupOverlay"
+                app:titleTextColor="@color/textColorBrown"/>
+
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.design.widget.AppBarLayout>
 

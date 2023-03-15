@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Kitchen_Master" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/teal_200</item>
+        <item name="pagesBackColor">@color/statusBar</item>
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/windowBack</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">?attr/pagesBackColor</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <item name="homeAsUpIndicator">@drawable/ic_menu</item>
+    </style>
+</resources>
