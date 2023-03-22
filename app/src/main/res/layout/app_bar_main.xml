@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:elevation="4dp"
@@ -28,7 +29,22 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:theme="@style/Theme.Kitchen_Master.NoActionBar"
                 app:popupTheme="@style/Theme.Kitchen_Master.PopupOverlay"
-                app:titleTextColor="@color/textColorBrown"/>
+                app:titleTextColor="@color/textColorBrown">
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_menu"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginEnd="21dp"/>
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.Toolbar>
+
 
         </android.support.constraint.ConstraintLayout>
 

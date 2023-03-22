@@ -10,8 +10,6 @@
         <item name="android:windowBackground">@color/windowBack</item>
         <item name="android:navigationBarColor">?attr/pagesBackColor</item>
         <item name="android:statusBarColor">@color/white</item>
-
-        <item name="homeAsUpIndicator">@drawable/ic_menu</item>
     </style>
     <attr name="pagesBackColor" format="reference"/>
 
