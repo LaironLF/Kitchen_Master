@@ -2,7 +2,6 @@ package com.laironlf.kitchen_master;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.support.design.widget.Snackbar;
@@ -16,7 +15,6 @@ import androidx.navigation.ui.NavigationUI;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 
-import com.laironlf.kitchen_master.DB.test;
 import com.laironlf.kitchen_master.databinding.ActivityMainNavBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,14 +44,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
-
-        test t = new test();
-        t.start();
-
     }
 
     @Override

@@ -10,4 +10,5 @@
     <color name="statusBar">#D3D3BA</color>
     <color name="windowBack">#EDEDDD</color>
     <color name="textColorBrown">#9A9A7C</color>
+    <color name="clr_back_item_day">#DFE3BF</color>
 </resources>
