@@ -15,6 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 
+import com.laironlf.kitchen_master.DB.test;
 import com.laironlf.kitchen_master.databinding.ActivityMainNavBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        test t = new test();
+        t.start();
+
     }
 
     @Override
