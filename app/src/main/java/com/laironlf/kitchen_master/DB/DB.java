@@ -6,7 +6,10 @@ import android.util.Log;
 import java.sql.DriverManager;
 import java.sql.Driver;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DB {
 //    static final String DB_URL = "jdbc:postgresql://postgresql:5432/northwind";
@@ -21,7 +24,7 @@ public class DB {
     private String url = "jdbc:postgresql://%s:%d/%s";
 //    private final String URL = "jdbc:postgresql://postgres:maxSQL145-max@127.0.0.1:5432/northwind";
     // postgres:maxSQL145-max@
-    private final String URL = "jdbc:postgresql://127.0.0.1:5432/northwind";
+    private final String URL = "jdbc:postgresql://10.0.2.2:5432/northwind";
     private boolean status;
     Connection connection = null;
 
@@ -44,7 +47,14 @@ public class DB {
                     Class.forName("org.postgresql.Driver");
 //                    connection = DriverManager.getConnection(url, user, pass);
                     connection = DriverManager.getConnection(URL, user, pass);
-
+                    Statement stmt = connection.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM orders limit 5");
+                    while (rs.next()) {
+                        String str = rs.getString("order_id") + ":" + rs.getString(2);
+                        System.out.println("Contact:" + str);
+                    }
+                    rs.close();
+                    stmt.close();
                     status = true;
                     System.out.println("connected:" + status);
                 }
