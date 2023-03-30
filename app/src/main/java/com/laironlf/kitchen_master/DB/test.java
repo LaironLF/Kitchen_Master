@@ -5,6 +5,6 @@ import android.util.Log;
 public class test {
     public void start() {
         DB datebase = new DB();
-        datebase.dataBase();
+        datebase.start();
     }
 }
