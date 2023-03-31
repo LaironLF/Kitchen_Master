@@ -19,15 +19,15 @@ public class DB {
     private final String host = "92.125.140.47";
     private final String database = "kitchen_master";
     private final int port = 5432;
-    private final String user = "sa";
-    private final String pass = "Digispot2";
+    private final String user = "host1857461";
+    private final String pass = "5zlXgoZ8em";
     private final String serverDriver = "net.sourceforge.jtds.jdbc.Driver";
     private final String postgreDriver = "org.postgresql.Driver";
 
     private final String driver = serverDriver;
 //    private final String URL = "jdbc:postgresql://postgres:maxSQL145-max@127.0.0.1:5432/northwind";
     // postgres:maxSQL145-max@
-    private final String URL = "jdbc:jtds:sqlserver://10.0.2.2:1433/kitchen_master";
+    private final String URL = "jdbc:mysql://host1857461.hostland.pro:3306/host1857461_test";
     private boolean status;
     Connection connection = null;
 
@@ -35,15 +35,16 @@ public class DB {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run(){
-                String connectionUrl = "jdbc:jtds:sqlserver://10.0.2.2:1433;encrypt=true;databaseName=AdventureWorks;user=Maxim;";
 
                 try {
-                    Class.forName(driver);
-                    Connection con = DriverManager.getConnection(connectionUrl);
+                    Class.forName("com.mysql.jdbc.Driver");
+                    System.out.println("trtrtr");
+                    Connection con = DriverManager.getConnection(URL, user, pass);
+                    System.out.println("trtrtr");
 //                    Statement stmt = con.createStatement();
 //                    String SQL = "SELECT TOP 10 * FROM Person.Contact";
 //                    ResultSet rs = stmt.executeQuery(SQL);
-                    System.out.println("connected: true");
+                    System.out.println("connected: true1");
 
                     // Iterate through the data in the result set and display it.
 //            while (rs.next()) {
@@ -52,10 +53,11 @@ public class DB {
                 }
                 // Handle any errors that may have occurred.
                 catch (SQLException e) {
-                    System.out.println("connected: false");
+                    System.out.println("connected: false2");
 //                    e.printStackTrace();
                 } catch (ClassNotFoundException e) {
-                    throw new RuntimeException(e);
+                    System.out.println("connected: false3");
+                    e.printStackTrace();
                 }
             }
         });
@@ -67,6 +69,8 @@ public class DB {
         catch (Exception e)
         {
             e.printStackTrace();
+            System.out.println("connected: false4");
+
             this.status = false;
         }
 
