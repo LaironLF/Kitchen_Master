@@ -12,22 +12,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DB {
-//    static final String DB_URL = "jdbc:postgresql://postgresql:5432/northwind";
-//    static final String USER = "postgresql";
-//    static final String PASS = "maxSQL145-max";
 
-    private final String host = "92.125.140.47";
-    private final String database = "kitchen_master";
-    private final int port = 5432;
-    private final String user = "host1857461";
-    private final String pass = "5zlXgoZ8em";
-    private final String serverDriver = "net.sourceforge.jtds.jdbc.Driver";
-    private final String postgreDriver = "org.postgresql.Driver";
+    private final String server = "host1857461.hostland.pro";
+    private final String database = "host1857461_kitchenmaster";
+    private final int port = 3306;
+    private final String user = "host1857461_app";
+    private final String pass = "7DikHCmD";
 
-    private final String driver = serverDriver;
-//    private final String URL = "jdbc:postgresql://postgres:maxSQL145-max@127.0.0.1:5432/northwind";
-    // postgres:maxSQL145-max@
-    private final String URL = "jdbc:mysql://host1857461.hostland.pro:3306/host1857461_test";
+    private final String driver = "com.mysql.jdbc.Driver";
+    private final String url = String.format("jdbc:mysql://%s:%d/%s", server, port, database);
     private boolean status;
     Connection connection = null;
 
@@ -37,14 +30,13 @@ public class DB {
             public void run(){
 
                 try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    System.out.println("trtrtr");
-                    Connection con = DriverManager.getConnection(URL, user, pass);
-                    System.out.println("trtrtr");
+                    Class.forName(driver);
+                    connection = DriverManager.getConnection(url, user, pass);
+                    status = true;
 //                    Statement stmt = con.createStatement();
 //                    String SQL = "SELECT TOP 10 * FROM Person.Contact";
 //                    ResultSet rs = stmt.executeQuery(SQL);
-                    System.out.println("connected: true1");
+                    System.out.println("connected:" + status);
 
                     // Iterate through the data in the result set and display it.
 //            while (rs.next()) {
