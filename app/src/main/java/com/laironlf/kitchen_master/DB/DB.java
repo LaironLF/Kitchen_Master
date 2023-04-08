@@ -21,7 +21,7 @@ public class DB {
     static private final String pass = "YlqloRJ2";
     static private final String driver = "com.mysql.jdbc.Driver";
     static private final String url = String.format("jdbc:mysql://%s:%d/%s", server, port, database);
-    static private boolean status;
+    static private boolean conStatus;
     static Connection connection = null;
 
     static public Connect connectionToDataBase = new Connect();
@@ -31,22 +31,22 @@ public class DB {
             try {
                 Class.forName(driver);
                 connection = DriverManager.getConnection(url, user, pass);
-                status = true;
+                conStatus = true;
                 Log.i("DB", "connectionToDataBase: connection true");
 
 
             } catch (SQLException e) {
                 Log.e("DB", "connectionToDataBase: connection false");
-                status = false;
+                conStatus = false;
             } catch (ClassNotFoundException e) {
                 Log.e("DB", "connectionToDataBase: connection false");
                 e.printStackTrace();
-                status = false;
+                conStatus = false;
             }
         }
     }
 
-    //    public void connectionToDataBase(){
+//    public void connectionToDataBase(){
 //        Thread thread = new Thread(new Runnable() {
 //            @Override
 //            public void run(){
@@ -88,7 +88,7 @@ public class DB {
     public static class Query extends Thread {
         private String sql;
         private ResultSet rs;
-        private boolean tStatus;
+        private boolean queryStatus;
 
         public void setSql(String sql) {
             this.sql = sql;
@@ -99,7 +99,7 @@ public class DB {
         }
 
         public void run() {
-            if (!status) {
+            if (!conStatus) {
                 return;
             }
             if (sql == null) {
@@ -107,15 +107,13 @@ public class DB {
             }
 
             try (Statement stmt = connection.createStatement()) {
-
                 rs = stmt.executeQuery(sql);
                 rs.close();
-                tStatus = true;
+                queryStatus = true;
             } catch (SQLException e) {
-                tStatus = false;
+                queryStatus = false;
                 Log.e("DB", "query: \n" + e);
             }
-
         }
     }
 
