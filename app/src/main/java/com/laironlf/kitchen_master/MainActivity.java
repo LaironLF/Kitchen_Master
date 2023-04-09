@@ -8,17 +8,22 @@
 package com.laironlf.kitchen_master;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModel;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.laironlf.kitchen_master.DB.DB;
 import com.laironlf.kitchen_master.DB.UserProducts;
@@ -29,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainNavBinding binding;
-
+    ImageView img;
+    @NonNull
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,9 +58,26 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        img = findViewById(R.id.imageView123);
+
         UserProducts.setContext(this);
+        UserProducts.readData();
 //        test t = new test();
 //        t.start();
+        DB.getRecipe.setSettings(UserProducts.getString());
+        DB.getRecipe.start();
+        try {
+            DB.getRecipe.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+//        urls = cursor.getString(cursor.getColumnIndex(Database.DATABASE_CHILD_3));
+        String url = "http://developer.alexanderklimov.ru/android/images/android_cat.jpg";
+        Glide
+                .with(this)
+                .load(url)
+
+                .into(img);
     }
 
     @Override
