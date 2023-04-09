@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.laironlf.kitchen_master.DB.DB;
+import com.laironlf.kitchen_master.DB.UserProducts;
 
 public class StartSplash extends AppCompatActivity {
 
@@ -26,7 +27,8 @@ public class StartSplash extends AppCompatActivity {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
+        UserProducts.setContext(this);
+        UserProducts.readData();
         startActivity(intent);
         finish();
     }

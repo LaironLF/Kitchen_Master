@@ -275,12 +275,12 @@ public class DB {
 //
 //    }
 
-//    public void close() {
-//        try {
-//            connection.close();
-//        } catch (SQLException e) {
-//            Log.e("BD", "close: \n" + e);
-//        }
-//    }
+    public static void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            Log.e("BD", "close: \n" + e);
+        }
+    }
 }
 

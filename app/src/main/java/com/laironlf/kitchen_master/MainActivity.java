@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainNavBinding binding;
-    ImageView img;
+
     @NonNull
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,20 +58,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        img = findViewById(R.id.imageView123);
-
-        UserProducts.setContext(this);
-        UserProducts.readData();
-//        test t = new test();
-//        t.start();
-        DB.getRecipe.setSettings(UserProducts.getString());
-        DB.getRecipe.start();
-        try {
-            DB.getRecipe.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-//        urls = cursor.getString(cursor.getColumnIndex(Database.DATABASE_CHILD_3));
 
     }
 
@@ -87,5 +73,12 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UserProducts.writeData();
+        DB.close();
     }
 }
