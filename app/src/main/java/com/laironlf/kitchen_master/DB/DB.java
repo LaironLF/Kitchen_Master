@@ -180,10 +180,12 @@ public class DB {
                     "	Recipes.Description, " +
                     "	Сomplexity.Name, " +
                     "	Type_of_dish.Name, " +
-                    "	Recipes.Time " +
+                    "	Recipes.Time, " +
+                    "	Images.URL " +
                     "FROM `Recipes` " +
                     "JOIN Сomplexity ON Recipes.RecipeID = Сomplexity.СomplexityID " +
                     "JOIN Type_of_dish ON Recipes.TypeID = Type_of_dish.TypeID " +
+                    "LEFT JOIN Images ON Recipes.RecipeID = Images.RecipeID " +
                     "INNER JOIN (" +
                     "	SELECT " +
                     "		t1.tt1, " +
@@ -225,7 +227,8 @@ public class DB {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
-                        rs.getTime(6)
+                        rs.getTime(6),
+                        rs.getString(7)
                 ));
             }
         }
