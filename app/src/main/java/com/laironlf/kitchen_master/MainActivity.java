@@ -15,6 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 
+import com.laironlf.kitchen_master.DB.DB;
 import com.laironlf.kitchen_master.DB.test;
 import com.laironlf.kitchen_master.databinding.ActivityMainNavBinding;
 

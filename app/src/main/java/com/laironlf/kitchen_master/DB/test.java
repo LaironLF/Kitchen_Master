@@ -1,9 +1,5 @@
 package com.laironlf.kitchen_master.DB;
 
-import android.util.Log;
-
-import java.sql.SQLException;
-
 public class test {
     public void start() {
 //        DB database = new DB();
@@ -16,13 +12,38 @@ public class test {
             throw new RuntimeException(e);
         }
 
-        DB.query.setSql("SELECT * FROM Products");
-        DB.query.start();
+//        DB.query.setSql("SELECT * FROM Products");
+//        DB.query.start();
+//        try {
+//            DB.query.join();
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+
+
+        DB.getProducts.start();
+
         try {
-            DB.query.join();
+            DB.getProducts.join();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
+        for (Product i : DB.products) {
+            i.pr();
+        }
+
+
+        DB.getRecipe.start();
+
+        try {
+            DB.getRecipe.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        for (Recipe i : DB.recipes) {
+            i.pr();
+        }
     }
 }

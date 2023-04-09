@@ -1,29 +1,27 @@
 package com.laironlf.kitchen_master.DB;
 
-import android.annotation.SuppressLint;
+
 import android.util.Log;
 
-import java.sql.Array;
 import java.sql.DriverManager;
-import java.sql.Driver;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class DB {
 
     static private final String server = "host1857461.hostland.pro";
     static private final String database = "host1857461_kitchenmaster";
     static private final int port = 3306;
-    static private final String user = "host1857461_add";
-    static private final String pass = "YlqloRJ2";
+    static private final String user = "host1857461_app";
+    static private final String pass = "7DikHCmD";
     static private final String driver = "com.mysql.jdbc.Driver";
     static private final String url = String.format("jdbc:mysql://%s:%d/%s", server, port, database);
-    static private boolean conStatus;
-    static Connection connection = null;
 
+    static Connection connection = null;
+    static private boolean conStatus;
     static public Connect connectionToDataBase = new Connect();
 
     public static class Connect extends Thread {
@@ -33,8 +31,6 @@ public class DB {
                 connection = DriverManager.getConnection(url, user, pass);
                 conStatus = true;
                 Log.i("DB", "connectionToDataBase: connection true");
-
-
             } catch (SQLException e) {
                 Log.e("DB", "connectionToDataBase: connection false");
                 conStatus = false;
@@ -42,6 +38,30 @@ public class DB {
                 Log.e("DB", "connectionToDataBase: connection false");
                 e.printStackTrace();
                 conStatus = false;
+            }
+        }
+    }
+
+    public static abstract class Query extends Thread{
+        protected String sql = null;
+        protected boolean queryStatus;
+        protected ResultSet rs;
+        protected abstract void logic() throws SQLException;
+
+        public void run() {
+            if (!conStatus) {
+                return;
+            }
+            if (sql == null){
+                Log.e("DB", "run: sql query is null");
+            }
+            try(Statement stmt = connection.createStatement() ) {
+                rs = stmt.executeQuery(sql);
+                this.logic();
+                queryStatus = true;
+            } catch (SQLException e) {
+                queryStatus = false;
+                Log.e("DB", "query: \n" + e);
             }
         }
     }
@@ -83,40 +103,96 @@ public class DB {
 //            status = false;
 //        }
 //    }
-    static public Query query = new Query();
+    public void t(){}
+//    static public Query query = new Query();
+//
+//    public static class Query extends Thread {
+//
+//        protected String sql;
+//        protected ResultSet rs;
+//        protected boolean queryStatus;
+//
+//        public Query(){
+//
+//        }
+//        public Query(String sql){
+//            this.sql = sql;
+//        }
+//
+//        public void setSql(String sql) {
+//            this.sql = sql;
+//        }
+//
+//        public ResultSet getRs(){
+//            return rs;
+//        }
+//
+//        public void run() {
+//            if (!conStatus) {
+//                return;
+//            }
+//            if (sql == null) {
+//                return;
+//            }
+//
+//            try(Statement stmt = connection.createStatement() ) {
+//                rs = stmt.executeQuery(sql);
+//                while (rs.next()){
+//                    System.out.println(rs.getInt(1) + " " + rs.getString(2));
+//
+//                }
+////                rs.close();
+//                queryStatus = true;
+//            } catch (SQLException e) {
+//                queryStatus = false;
+//                Log.e("DB", "query: \n" + e);
+//            }
+//        }
+//    }
 
-    public static class Query extends Thread {
-        private String sql;
-        private ResultSet rs;
-        private boolean queryStatus;
-
-        public void setSql(String sql) {
-            this.sql = sql;
+    public static ArrayList<Product> products = new ArrayList<>();
+    public static GetProducts getProducts = new GetProducts();
+    public static class GetProducts extends Query {
+        public GetProducts(){
+            sql = "SELECT * FROM Products";
         }
 
-        public ResultSet getRs(){
-            return rs;
-        }
+        @Override
+        protected void logic() throws SQLException {
+            products.ensureCapacity(rs.getFetchSize());
 
-        public void run() {
-            if (!conStatus) {
-                return;
-            }
-            if (sql == null) {
-                return;
-            }
-
-            try (Statement stmt = connection.createStatement()) {
-                rs = stmt.executeQuery(sql);
-                rs.close();
-                queryStatus = true;
-            } catch (SQLException e) {
-                queryStatus = false;
-                Log.e("DB", "query: \n" + e);
+            while (rs.next()) {
+                products.add(new Product(rs.getInt("ProductID"), rs.getString("Name")));
             }
         }
     }
 
+    public static ArrayList<Recipe> recipes = new ArrayList<>();
+    public static GetRecipe getRecipe = new GetRecipe();
+    public static class GetRecipe extends Query {
+
+        public GetRecipe(){
+            sql =
+                "SELECT RecipeID, Recipes.Name, Description, Сomplexity.Name, Type_of_dish.Name, Recipes.Time " +
+                "FROM Recipes " +
+                "JOIN Сomplexity ON Recipes.RecipeID = Сomplexity.СomplexityID " +
+                "JOIN Type_of_dish ON Recipes.TypeID = Type_of_dish.TypeID";
+        }
+        @Override
+        protected void logic() throws SQLException{
+            recipes.ensureCapacity(rs.getFetchSize());
+            while (rs.next()) {
+                recipes.add(new Recipe(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getTime(6)
+                ));
+            }
+        }
+    }
 
 //    public void query(String sql) {
 //        Thread thread = new Thread(new Runnable() {
