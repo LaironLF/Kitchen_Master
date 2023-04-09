@@ -34,18 +34,18 @@ public class test {
         }
 
 
-//        UserProducts.add(DB.products.get(0));
-//        UserProducts.add(DB.products.get(3));
-//        UserProducts.add(DB.products.get(4));
-//        UserProducts.add(DB.products.get(52));
-//        UserProducts.add(DB.products.get(67));
-//        UserProducts.add(DB.products.get(69));
-//        UserProducts.add(DB.products.get(80));
-//        UserProducts.add(DB.products.get(81));
-//        UserProducts.add(DB.products.get(82));
-//        UserProducts.add(DB.products.get(83));
-//        UserProducts.add(DB.products.get(84));
-//        UserProducts.add(DB.products.get(89));
+        UserProducts.add(DB.products.get(0));
+        UserProducts.add(DB.products.get(3));
+        UserProducts.add(DB.products.get(4));
+        UserProducts.add(DB.products.get(52));
+        UserProducts.add(DB.products.get(67));
+        UserProducts.add(DB.products.get(69));
+        UserProducts.add(DB.products.get(80));
+        UserProducts.add(DB.products.get(81));
+        UserProducts.add(DB.products.get(82));
+        UserProducts.add(DB.products.get(83));
+        UserProducts.add(DB.products.get(84));
+        UserProducts.add(DB.products.get(89));
 
         UserProducts.writeData();
         UserProducts.readData();
