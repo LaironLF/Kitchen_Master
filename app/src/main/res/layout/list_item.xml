@@ -17,13 +17,19 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="18dp">
 
-        <ImageView
-            android:id="@+id/imageReceipt"
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:contentDescription="TODO"
-            android:scaleType="centerCrop"
-            android:src="@drawable/image_example" />
+            app:cardCornerRadius="20dp">
+            <ImageView
+                android:id="@+id/imageReceipt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/image_shape"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image_example" />
+        </android.support.v7.widget.CardView>
+
 
         <TextView
             android:id="@+id/tv_receiptTitle"
