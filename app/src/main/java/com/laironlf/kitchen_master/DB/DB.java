@@ -170,16 +170,84 @@ public class DB {
     public static ArrayList<Recipe> recipes = new ArrayList<>();
     public static GetRecipe getRecipe = new GetRecipe();
     public static class GetRecipe extends Query {
-
+        String settings;
         public GetRecipe(){
             sql =
-                "SELECT RecipeID, Recipes.Name, Description, Сomplexity.Name, Type_of_dish.Name, Recipes.Time " +
-                "FROM Recipes " +
-                "JOIN Сomplexity ON Recipes.RecipeID = Сomplexity.СomplexityID " +
-                "JOIN Type_of_dish ON Recipes.TypeID = Type_of_dish.TypeID";
+                    "SELECT " +
+                    "	Recipes.RecipeID, " +
+                    "	Recipes.Name, " +
+                    "	Recipes.Description, " +
+                    "	Сomplexity.Name, " +
+                    "	Type_of_dish.Name, " +
+                    "	Recipes.Time " +
+                    "FROM `Recipes` " +
+                    "JOIN Сomplexity ON Recipes.RecipeID = Сomplexity.СomplexityID " +
+                    "JOIN Type_of_dish ON Recipes.TypeID = Type_of_dish.TypeID " +
+                    "INNER JOIN (" +
+                    "	SELECT " +
+                    "		t1.tt1, " +
+                    "		t1.`RecipeID` " +
+                    "	FROM ( " +
+                    "		SELECT " +
+                    "			COUNT(`IngredientID`) AS tt1, " +
+                    "			Ingredients.`RecipeID` " +
+                    "		FROM `Ingredients` " +
+                    "		GROUP BY Ingredients.RecipeID " +
+                    "		HAVING COUNT(`IngredientID`) " +
+                    "	) AS t1 " +
+                    "	INNER JOIN ( " +
+                    "		SELECT " +
+                    "			COUNT(IngredientID) AS tt2, " +
+                    "			RecipeID " +
+                    "		FROM Ingredients " +
+                    "		WHERE ProductID IN(0) " +
+                    "		GROUP BY RecipeID " +
+                    "		HAVING COUNT(IngredientID) " +
+                    "	) AS t2 ON t1.tt1 = t2.tt2 " +
+                    ") AS t3 ON Recipes.RecipeID = t3.RecipeID";
         }
+
+        public void setSettings(String settings){
+            this.settings = settings;
+            sql =
+                    "SELECT " +
+                            "	Recipes.RecipeID, " +
+                            "	Recipes.Name, " +
+                            "	Recipes.Description, " +
+                            "	Сomplexity.Name, " +
+                            "	Type_of_dish.Name, " +
+                            "	Recipes.Time " +
+                            "FROM `Recipes` " +
+                            "JOIN Сomplexity ON Recipes.RecipeID = Сomplexity.СomplexityID " +
+                            "JOIN Type_of_dish ON Recipes.TypeID = Type_of_dish.TypeID " +
+                            "INNER JOIN (" +
+                            "	SELECT " +
+                            "		t1.tt1, " +
+                            "		t1.`RecipeID` " +
+                            "	FROM ( " +
+                            "		SELECT " +
+                            "			COUNT(`IngredientID`) AS tt1, " +
+                            "			Ingredients.`RecipeID` " +
+                            "		FROM `Ingredients` " +
+                            "		GROUP BY Ingredients.RecipeID " +
+                            "		HAVING COUNT(`IngredientID`) " +
+                            "	) AS t1 " +
+                            "	INNER JOIN ( " +
+                            "		SELECT " +
+                            "			COUNT(IngredientID) AS tt2, " +
+                            "			RecipeID " +
+                            "		FROM Ingredients " +
+                            String.format("		WHERE ProductID IN(%s) ",settings) +
+                            "		GROUP BY RecipeID " +
+                            "		HAVING COUNT(IngredientID) " +
+                            "	) AS t2 ON t1.tt1 = t2.tt2 " +
+                            ") AS t3 ON Recipes.RecipeID = t3.RecipeID";
+
+        }
+
         @Override
         protected void logic() throws SQLException{
+
             recipes.ensureCapacity(rs.getFetchSize());
             while (rs.next()) {
                 recipes.add(new Recipe(
