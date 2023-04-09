@@ -22,4 +22,9 @@
         android:name="com.laironlf.kitchen_master.ui.slideshow.SlideshowFragment"
         android:label="@string/nav_recipes_string"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.laironlf.kitchen_master.ui.productList.BlankFragment"
+        android:label="Продукты"
+        tools:layout="@layout/fragment_blank" />
 </navigation>

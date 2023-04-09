@@ -8,45 +8,44 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.laironlf.kitchen_master.DB.Product;
 import com.laironlf.kitchen_master.R;
 
 import java.util.List;
 
-public class ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter.ViewHolder> {
-    private LayoutInflater inflater;
-    private List<Receipt> receipts;
+public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ViewHolder> {
 
-    public ReceiptListAdapter(Context context, List<Receipt> receipts){
-        this.receipts = receipts;
+    private LayoutInflater inflater;
+    private List<Product> products;
+
+    public ProductListAdapter(Context context, List<Product> products){
+        this.products = products;
         this.inflater = LayoutInflater.from(context);
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = inflater.inflate(R.layout.list_item, viewGroup, false);
+
+        View view = inflater.inflate(R.layout.product_item, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Receipt receipt = receipts.get(i);
-        viewHolder.ReceiptType.setText(receipt.getName());
-        viewHolder.ReceiptType.setText(receipt.getDish_type());
+        viewHolder.productName.setText(products.get(i).name);
     }
 
     @Override
-    public int getItemCount() {
-        return receipts.size();
-    }
+    public int getItemCount() { return products.size(); }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView ReceiptTitle, ReceiptType;
+        TextView productName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ReceiptTitle = (TextView) itemView.findViewById(R.id.tv_receiptTitle);
-            ReceiptType = (TextView) itemView.findViewById(R.id.tv_receiptType);
+            productName = (TextView) itemView.findViewById(R.id.productName);
         }
     }
 }

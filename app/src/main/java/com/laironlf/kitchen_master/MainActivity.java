@@ -48,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
+        test t = new test();
+        t.start();
+
+
     }
 
     @Override
