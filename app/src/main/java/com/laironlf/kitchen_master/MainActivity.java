@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        DB.connectionToDataBase.start();
         binding = ActivityMainNavBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -50,7 +50,12 @@ public class MainActivity extends AppCompatActivity {
 //        test t = new test();
 //        t.start();
 
-
+        try {
+            DB.connectionToDataBase.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        DB.getProducts.start();
     }
 
     @Override

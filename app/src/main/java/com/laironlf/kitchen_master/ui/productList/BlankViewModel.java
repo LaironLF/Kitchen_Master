@@ -17,14 +17,9 @@ public class BlankViewModel extends ViewModel {
 
     public BlankViewModel(){
         productList = new MutableLiveData<>();
-        DB.connectionToDataBase.start();
-        try {
-            DB.connectionToDataBase.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
 
-        DB.getProducts.start();
+
+
 
         try {
             DB.getProducts.join();
