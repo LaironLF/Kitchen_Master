@@ -61,9 +61,7 @@ public class UserProducts {
             String text = stringForWrite();
             fos = mContext.openFileOutput(fileName, Context.MODE_PRIVATE);
             fos.write(text.getBytes());
-        } catch (IOException ex) {
-            Log.e(TAG, "writeData: \n"+ex);
-        } catch (java.lang.NullPointerException ex){
+        } catch (IOException | NullPointerException ex) {
             Log.e(TAG, "writeData: \n"+ex);
         } finally {
             try{
@@ -91,10 +89,8 @@ public class UserProducts {
                 userProducts.add(new Product(Integer.parseInt(g[0]), g[1]));
             }
         }
-        catch(IOException ex) {
+        catch(IOException | java.lang.NullPointerException ex) {
             Log.e(TAG, "readData: \n"+ex);
-        } catch (java.lang.NullPointerException ex){
-            Log.e(TAG, "writeData: \n"+ex);
         } finally {
             try{
                 if(fin!=null)
