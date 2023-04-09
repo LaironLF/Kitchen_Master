@@ -11,22 +11,11 @@ import com.laironlf.kitchen_master.DB.Product;
 import java.util.ArrayList;
 
 public class BlankViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
     private MutableLiveData<ArrayList<Product>> productList;
 
 
     public BlankViewModel(){
         productList = new MutableLiveData<>();
-
-
-
-
-        try {
-            DB.getProducts.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
         productList.setValue(DB.products);
     }
 

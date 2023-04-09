@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -29,31 +30,36 @@ public class BlankFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        BlankViewModel blankViewModel =
-                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(BlankViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        // setup VM and Binding
+        mViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(BlankViewModel.class);
         binding = FragmentBlankBinding.inflate(inflater, container, false);
         root = binding.getRoot();
 
+        // setup views
+        setupRecyclerView();
+        updateRecyclerView();
+        return root;
+    }
 
+
+
+    private void setupRecyclerView() {
         recyclerView = (RecyclerView) binding.productsRecycler;
-        blankViewModel.getProducts().observe(getViewLifecycleOwner(), products -> {
+    }
+
+    private void updateRecyclerView() {
+        mViewModel.getProducts().observe(getViewLifecycleOwner(), products -> {
             productListAdapter = new ProductListAdapter(root.getContext(), products);
             recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
-
             recyclerView.setAdapter(productListAdapter);
-            Log.d("myLog", "эй, алооо, я тут!");
         });
-
-        return root;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(BlankViewModel.class);
 
     }
 

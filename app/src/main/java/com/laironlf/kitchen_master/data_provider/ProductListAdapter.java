@@ -36,6 +36,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         return new ViewHolder(view);
     }
 
+
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.productName.setText(products.get(i).name);
