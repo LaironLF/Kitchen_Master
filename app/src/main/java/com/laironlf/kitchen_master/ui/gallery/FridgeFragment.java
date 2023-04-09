@@ -1,13 +1,10 @@
 package com.laironlf.kitchen_master.ui.gallery;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.arch.lifecycle.ViewModelProvider;
@@ -15,23 +12,19 @@ import android.arch.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.laironlf.kitchen_master.R;
-import com.laironlf.kitchen_master.data_provider.Receipt;
-import com.laironlf.kitchen_master.data_provider.ReceiptListAdapter;
-import com.laironlf.kitchen_master.databinding.FragmentGalleryBinding;
+import com.laironlf.kitchen_master.databinding.FragmentFridgeBinding;
 
-import java.util.ArrayList;
+public class FridgeFragment extends Fragment implements View.OnClickListener{
 
-public class GalleryFragment extends Fragment implements View.OnClickListener{
-
-    private FragmentGalleryBinding binding;
+    private FragmentFridgeBinding binding;
     private LinearLayout addProductBtn;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        GalleryViewModel galleryViewModel =
-                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(GalleryViewModel.class);
+        FridgeViewModel fridgeViewModel =
+                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(FridgeViewModel.class);
 
-        binding = FragmentGalleryBinding.inflate(inflater, container, false);
+        binding = FragmentFridgeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         addProductBtn = (LinearLayout) binding.addProductBtn;

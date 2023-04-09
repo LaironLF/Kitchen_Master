@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.laironlf.kitchen_master.ui.gallery.GalleryFragment"
+        android:name="com.laironlf.kitchen_master.ui.gallery.FridgeFragment"
         android:label="@string/nav_fridge_string"
-        tools:layout="@layout/fragment_gallery" >
+        tools:layout="@layout/fragment_fridge" >
         <action
             android:id="@+id/action_nav_gallery_to_blankFragment"
             app:destination="@id/products" />
@@ -23,12 +23,12 @@
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.laironlf.kitchen_master.ui.slideshow.SlideshowFragment"
+        android:name="com.laironlf.kitchen_master.ui.slideshow.ReceiptsFragment"
         android:label="@string/nav_recipes_string"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_recipes" />
     <fragment
         android:id="@+id/products"
-        android:name="com.laironlf.kitchen_master.ui.productList.BlankFragment"
+        android:name="com.laironlf.kitchen_master.ui.productList.AddProductFragment"
         android:label="Продукты"
-        tools:layout="@layout/fragment_blank" />
+        tools:layout="@layout/fragment_addproducts" />
 </navigation>

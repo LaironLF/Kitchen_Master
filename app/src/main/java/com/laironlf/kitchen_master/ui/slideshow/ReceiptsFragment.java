@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.arch.lifecycle.ViewModelProvider;
@@ -14,23 +13,23 @@ import android.arch.lifecycle.ViewModelProvider;
 import com.laironlf.kitchen_master.R;
 import com.laironlf.kitchen_master.data_provider.Receipt;
 import com.laironlf.kitchen_master.data_provider.ReceiptListAdapter;
-import com.laironlf.kitchen_master.databinding.FragmentSlideshowBinding;
+import com.laironlf.kitchen_master.databinding.FragmentRecipesBinding;
 
 import java.util.ArrayList;
 
-public class SlideshowFragment extends Fragment {
+public class ReceiptsFragment extends Fragment {
 
-    private FragmentSlideshowBinding binding;
+    private FragmentRecipesBinding binding;
 
     private RecyclerView recyclerView;
     private ArrayList<Receipt> receipts = new ArrayList<Receipt>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(SlideshowViewModel.class);
+        ReceiptsViewModel receiptsViewModel =
+                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(ReceiptsViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentRecipesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         addReceipts();

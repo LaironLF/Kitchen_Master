@@ -18,14 +18,16 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     private LayoutInflater inflater;
     private ArrayList<Product> products;
+    private OnProductClickListener mOnProductClickListener;
 
     public void setProductList(ArrayList<Product> products){
         this.products = products;
     }
 
-    public ProductListAdapter(Context context, ArrayList<Product> products){
+    public ProductListAdapter(Context context, ArrayList<Product> products, OnProductClickListener mOnProductClickListener){
         this.inflater = LayoutInflater.from(context);
         this.products = products;
+        this.mOnProductClickListener =mOnProductClickListener;
     }
 
     @NonNull
@@ -33,7 +35,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         View view = inflater.inflate(R.layout.product_item, viewGroup, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, mOnProductClickListener);
     }
 
 
@@ -47,12 +49,25 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public int getItemCount() { return products.size(); }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView productName;
+        OnProductClickListener onProductClickListener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnProductClickListener onProductClickListener) {
             super(itemView);
             productName = (TextView) itemView.findViewById(R.id.productName);
+            this.onProductClickListener = onProductClickListener;
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            onProductClickListener.onProductClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnProductClickListener{
+        void onProductClick(int i);
     }
 }
