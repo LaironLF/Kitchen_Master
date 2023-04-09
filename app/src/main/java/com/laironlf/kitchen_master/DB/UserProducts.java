@@ -22,8 +22,8 @@ public class UserProducts {
     static final String TAG = "UserProducts";
     public static String fileName = "appdata";
     public static ArrayList<Product> userProducts = new ArrayList<>();
-    public static Context mContext;
-    public void setContext(Context context){
+    public static Context mContext = null;
+    public static void setContext(Context context){
         mContext = context;
     }
     public static void capacity(int capacity){
@@ -55,16 +55,18 @@ public class UserProducts {
         return res.toString();
     }
     public static void writeData(){
+        if (userProducts.size() == 0) return;
         FileOutputStream fos = null;
         try {
             String text = stringForWrite();
+            text = "";
             fos = mContext.openFileOutput(fileName, Context.MODE_PRIVATE);
             fos.write(text.getBytes());
-        }
-        catch(IOException ex) {
+        } catch (IOException ex) {
             Log.e(TAG, "writeData: \n"+ex);
-        }
-        finally{
+        } catch (java.lang.NullPointerException ex){
+            Log.e(TAG, "writeData: \n"+ex);
+        } finally {
             try{
                 if(fos!=null)
                     fos.close();
@@ -75,24 +77,26 @@ public class UserProducts {
         }
     }
     public static void readData(){
+        if (userProducts.size() != 0) return;
         FileInputStream fin = null;
         try {
             fin = mContext.openFileInput(fileName);
             byte[] bytes = new byte[fin.available()];
             fin.read(bytes);
             String text = new String(bytes);
-            String[] t = text.split("/|");
+
+            String[] t = text.split("\\|");
+            userProducts.ensureCapacity(t.length);
             for (String i : t) {
                 String[] g = i.split(":");
-                int productID = Integer.parseInt(g[0]);
-                String name = g[1];
-                Product temp = new Product(productID, name);
+                userProducts.add(new Product(Integer.parseInt(g[0]), g[1]));
             }
         }
         catch(IOException ex) {
             Log.e(TAG, "readData: \n"+ex);
-        }
-        finally{
+        } catch (java.lang.NullPointerException ex){
+            Log.e(TAG, "writeData: \n"+ex);
+        } finally {
             try{
                 if(fin!=null)
                     fin.close();
