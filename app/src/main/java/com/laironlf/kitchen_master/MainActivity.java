@@ -16,6 +16,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 
 import com.laironlf.kitchen_master.DB.DB;
+import com.laironlf.kitchen_master.DB.UserProducts;
 import com.laironlf.kitchen_master.DB.test;
 import com.laironlf.kitchen_master.databinding.ActivityMainNavBinding;
 
@@ -46,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-//        test t = new test();
-//        t.start();
-
+        UserProducts.setContext(this);
+        test t = new test();
+        t.start();
     }
 
     @Override
