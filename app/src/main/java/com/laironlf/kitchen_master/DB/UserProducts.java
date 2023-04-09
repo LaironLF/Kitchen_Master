@@ -59,7 +59,6 @@ public class UserProducts {
         FileOutputStream fos = null;
         try {
             String text = stringForWrite();
-            text = "";
             fos = mContext.openFileOutput(fileName, Context.MODE_PRIVATE);
             fos.write(text.getBytes());
         } catch (IOException ex) {
