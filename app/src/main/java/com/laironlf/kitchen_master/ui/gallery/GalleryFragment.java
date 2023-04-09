@@ -6,10 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.arch.lifecycle.ViewModelProvider;
+
+import androidx.navigation.Navigation;
 
 import com.laironlf.kitchen_master.R;
 import com.laironlf.kitchen_master.data_provider.Receipt;
@@ -18,9 +21,10 @@ import com.laironlf.kitchen_master.databinding.FragmentGalleryBinding;
 
 import java.util.ArrayList;
 
-public class GalleryFragment extends Fragment {
+public class GalleryFragment extends Fragment implements View.OnClickListener{
 
     private FragmentGalleryBinding binding;
+    private LinearLayout addProductBtn;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +34,8 @@ public class GalleryFragment extends Fragment {
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        addProductBtn = (LinearLayout) binding.addProductBtn;
+        addProductBtn.setOnClickListener(this);
 
         return root;
     }
@@ -40,4 +46,12 @@ public class GalleryFragment extends Fragment {
         binding = null;
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.addProductBtn:
+                Navigation.findNavController(view).navigate(R.id.action_nav_gallery_to_blankFragment);
+                break;
+        }
+    }
 }
