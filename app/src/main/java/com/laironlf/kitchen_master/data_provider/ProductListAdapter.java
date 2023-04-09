@@ -11,16 +11,21 @@ import android.widget.TextView;
 import com.laironlf.kitchen_master.DB.Product;
 import com.laironlf.kitchen_master.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
-    private List<Product> products;
+    private ArrayList<Product> products;
 
-    public ProductListAdapter(Context context, List<Product> products){
+    public void setProductList(ArrayList<Product> products){
         this.products = products;
+    }
+
+    public ProductListAdapter(Context context, ArrayList<Product> products){
         this.inflater = LayoutInflater.from(context);
+        this.products = products;
     }
 
     @NonNull

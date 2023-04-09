@@ -50,9 +50,6 @@ public class MainActivity extends AppCompatActivity {
 //        test t = new test();
 //        t.start();
 
-        test t = new test();
-        t.start();
-
 
     }
 
