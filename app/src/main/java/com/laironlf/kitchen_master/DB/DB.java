@@ -54,6 +54,7 @@ public class DB {
             }
             if (sql == null){
                 Log.e("DB", "run: sql query is null");
+                return;
             }
             try(Statement stmt = connection.createStatement() ) {
                 rs = stmt.executeQuery(sql);
@@ -218,7 +219,7 @@ public class DB {
 
         @Override
         protected void logic() throws SQLException{
-
+            recipes.clear();
             recipes.ensureCapacity(rs.getFetchSize());
             while (rs.next()) {
                 recipes.add(new Recipe(
@@ -231,6 +232,7 @@ public class DB {
                         rs.getString(7)
                 ));
             }
+            getRecipe = new GetRecipe();
         }
     }
 
