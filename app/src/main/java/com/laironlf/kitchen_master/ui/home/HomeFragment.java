@@ -4,17 +4,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
+import com.laironlf.kitchen_master.R;
 import com.laironlf.kitchen_master.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
+    ImageView img;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -26,6 +30,14 @@ public class HomeFragment extends Fragment {
 
         final TextView textView = binding.textHome;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        img = (ImageView) root.findViewById(R.id.imageView123);
+        String url = "http://developer.alexanderklimov.ru/android/images/android_cat.jpg";
+        Glide
+                .with(root.getContext())
+                .load(url)
+                .into(img);
+
         return root;
     }
 

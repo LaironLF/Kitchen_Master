@@ -72,12 +72,7 @@ public class MainActivity extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 //        urls = cursor.getString(cursor.getColumnIndex(Database.DATABASE_CHILD_3));
-        String url = "http://developer.alexanderklimov.ru/android/images/android_cat.jpg";
-        Glide
-                .with(this)
-                .load(url)
 
-                .into(img);
     }
 
     @Override
