@@ -7,21 +7,19 @@
 
 package com.laironlf.kitchen_master;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.View;
 import android.view.Menu;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.NavigationView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 
+import com.google.android.material.navigation.NavigationView;
 import com.laironlf.kitchen_master.DB.DB;
 import com.laironlf.kitchen_master.DB.UserProducts;
 import com.laironlf.kitchen_master.DB.test;

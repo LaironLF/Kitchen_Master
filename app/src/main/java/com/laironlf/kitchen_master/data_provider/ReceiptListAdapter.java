@@ -1,22 +1,24 @@
 package com.laironlf.kitchen_master.data_provider;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.laironlf.kitchen_master.DB.Recipe;
 import com.laironlf.kitchen_master.R;
 
 import java.util.List;
 
 public class ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter.ViewHolder> {
     private LayoutInflater inflater;
-    private List<Receipt> receipts;
+    private List<Recipe> receipts;
 
-    public ReceiptListAdapter(Context context, List<Receipt> receipts){
+    public ReceiptListAdapter(Context context, List<Recipe> receipts){
         this.receipts = receipts;
         this.inflater = LayoutInflater.from(context);
     }
@@ -30,9 +32,9 @@ public class ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Receipt receipt = receipts.get(i);
-        viewHolder.ReceiptType.setText(receipt.getName());
-        viewHolder.ReceiptType.setText(receipt.getDish_type());
+        Recipe receipt = receipts.get(i);
+        viewHolder.ReceiptType.setText(receipt.recipeName);
+        viewHolder.ReceiptType.setText(receipt.typeName);
     }
 
     @Override

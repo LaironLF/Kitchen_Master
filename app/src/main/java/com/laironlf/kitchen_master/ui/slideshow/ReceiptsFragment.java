@@ -1,14 +1,15 @@
 package com.laironlf.kitchen_master.ui.slideshow;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.arch.lifecycle.ViewModelProvider;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.laironlf.kitchen_master.R;
 import com.laironlf.kitchen_master.data_provider.Receipt;
@@ -32,12 +33,11 @@ public class ReceiptsFragment extends Fragment {
         binding = FragmentRecipesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        addReceipts();
-        recyclerView = (RecyclerView) root.findViewById(R.id.RclV_listReceipts);
-        ReceiptListAdapter receiptListAdapter = new ReceiptListAdapter(root.getContext(), receipts);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
-        recyclerView.setAdapter(receiptListAdapter);
+//        recyclerView = (RecyclerView) root.findViewById(R.id.RclV_listReceipts);
+//        ReceiptListAdapter receiptListAdapter = new ReceiptListAdapter(root.getContext(), receip);
+//
+//        recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
+//        recyclerView.setAdapter(receiptListAdapter);
 
         return root;
     }
@@ -48,11 +48,4 @@ public class ReceiptsFragment extends Fragment {
         binding = null;
     }
 
-    private void addReceipts(){
-        receipts.add(new Receipt("Борщ", "супы"));
-        receipts.add(new Receipt("Мохнатка", "супы"));
-        receipts.add(new Receipt("Борщ", "супы"));
-        receipts.add(new Receipt("Бурыши", "кхехе"));
-        receipts.add(new Receipt("Борщ", "супы"));
-    }
 }

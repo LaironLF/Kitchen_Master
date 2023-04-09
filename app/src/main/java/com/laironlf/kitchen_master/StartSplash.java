@@ -1,8 +1,9 @@
 package com.laironlf.kitchen_master;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.laironlf.kitchen_master.DB.DB;
 
@@ -25,6 +26,7 @@ public class StartSplash extends AppCompatActivity {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
         startActivity(intent);
         finish();
     }
