@@ -4,11 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.laironlf.kitchen_master.DB.Recipe;
 import com.laironlf.kitchen_master.R;
 
@@ -17,6 +19,7 @@ import java.util.List;
 public class ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter.ViewHolder> {
     private LayoutInflater inflater;
     private List<Recipe> receipts;
+    private Context context;
 
     public ReceiptListAdapter(Context context, List<Recipe> receipts){
         this.receipts = receipts;
@@ -33,8 +36,12 @@ public class ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Recipe receipt = receipts.get(i);
-        viewHolder.ReceiptType.setText(receipt.recipeName);
+        viewHolder.ReceiptTitle.setText(receipt.recipeName);
         viewHolder.ReceiptType.setText(receipt.typeName);
+        Glide
+                .with(inflater.getContext())
+                .load("http://developer.alexanderklimov.ru/android/images/android_cat.jpg")
+                .into(viewHolder.RecipeImage);
     }
 
     @Override
@@ -44,11 +51,17 @@ public class ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter.
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView ReceiptTitle, ReceiptType;
+        ImageView RecipeImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ReceiptTitle = (TextView) itemView.findViewById(R.id.tv_receiptTitle);
             ReceiptType = (TextView) itemView.findViewById(R.id.tv_receiptType);
+            RecipeImage = (ImageView) itemView.findViewById(R.id.imageReceipt);
         }
+    }
+
+    public interface OnRecipeClickListener{
+        void onRecipeClick(int i);
     }
 }

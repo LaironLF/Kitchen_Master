@@ -9,25 +9,27 @@ import com.laironlf.kitchen_master.DB.DB;
 import com.laironlf.kitchen_master.DB.Recipe;
 import com.laironlf.kitchen_master.DB.UserProducts;
 
+import java.util.ArrayList;
+
 public class ReceiptsViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    private MutableLiveData<ArrayList<Recipe>> recipes;
 
     public ReceiptsViewModel() {
         DB.getRecipe.setSettings(UserProducts.getString(), 1);
         DB.getRecipe.start();
-
-        mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
 
         try {
             DB.getRecipe.join();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
+        recipes = new MutableLiveData<>();
+        recipes.setValue(DB.recipes);
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<ArrayList<Recipe>> getRecipes(){
+        return recipes;
     }
 }
