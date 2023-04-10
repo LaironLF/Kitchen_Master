@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.RequestManager;
 import com.laironlf.kitchen_master.DB.Recipe;
 import com.laironlf.kitchen_master.R;
 
@@ -24,6 +26,7 @@ public class ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter.
     public ReceiptListAdapter(Context context, List<Recipe> receipts){
         this.receipts = receipts;
         this.inflater = LayoutInflater.from(context);
+        this.context = context;
     }
 
     @NonNull
@@ -38,9 +41,16 @@ public class ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter.
         Recipe receipt = receipts.get(i);
         viewHolder.ReceiptTitle.setText(receipt.recipeName);
         viewHolder.ReceiptType.setText(receipt.typeName);
+
+//        RequestManager requestManager = Glide.with(context);
+//        RequestBuilder requestBuilder = requestManager.load("http://developer.alexanderklimov.ru/android/images/android_cat.jpg");
+//        requestBuilder.into(viewHolder.RecipeImage);
+
         Glide
-                .with(inflater.getContext())
-                .load("http://developer.alexanderklimov.ru/android/images/android_cat.jpg")
+                .with(context)
+                .load(receipt.imageMainURL)
+//                .placeholder(R.drawable.easy_cook)
+//                .error(R.drawable.hard_cook)
                 .into(viewHolder.RecipeImage);
     }
 

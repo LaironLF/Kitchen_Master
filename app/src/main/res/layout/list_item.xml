@@ -20,13 +20,12 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
             app:cardCornerRadius="18dp">
             <ImageView
                 android:id="@+id/imageReceipt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/image_shape"
                 android:scaleType="centerCrop"
                 android:src="@drawable/image_example" />
         </androidx.cardview.widget.CardView>
