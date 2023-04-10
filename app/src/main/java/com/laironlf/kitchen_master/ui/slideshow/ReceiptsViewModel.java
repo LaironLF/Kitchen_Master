@@ -16,7 +16,7 @@ public class ReceiptsViewModel extends ViewModel {
     private MutableLiveData<ArrayList<Recipe>> recipes;
 
     public ReceiptsViewModel() {
-        DB.getRecipe.setSettings(UserProducts.getString(), 1);
+        DB.getRecipe.setSettings(UserProducts.getString(), 0);
         DB.getRecipe.start();
 
         try {
