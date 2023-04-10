@@ -256,7 +256,7 @@ public class DB {
                         rs.getString(7)
                 ));
             }
-            getRecipe = new GetRecipe();
+//            getRecipe = new GetRecipe();
         }
     }
 
@@ -289,7 +289,7 @@ public class DB {
                         rs.getInt(5)
                 ));
             }
-            getIngredients = new GetIngredients();
+//            getIngredients = new GetIngredients();
         }
     }
 

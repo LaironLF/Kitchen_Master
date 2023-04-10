@@ -24,6 +24,7 @@ public class ReceiptsViewModel extends ViewModel {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        DB.getRecipe = new DB.GetRecipe();
 
         recipes = new MutableLiveData<>();
         recipes.setValue(DB.recipes);
