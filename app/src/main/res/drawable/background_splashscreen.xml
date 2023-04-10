@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-<!--    <item>-->
-<!--        <shape>-->
-<!--            <gradient-->
-<!--                android:startColor="#FFF2CC8F"-->
-<!--                android:endColor="#FFE07A5F"-->
-<!--                android:startX="256"-->
-<!--                android:startY="0"-->
-<!--                android:endX="256"-->
-<!--                android:endY="512"-->
-<!--                android:angle="-145"-->
-<!--                android:type="linear">-->
-<!--            </gradient>-->
-<!--        </shape>-->
-<!--    </item>-->
-    <item android:drawable="@color/white"/>
+    <item>
+        <shape>
+            <gradient
+                android:startColor="#FFF2CC8F"
+                android:endColor="#FFE07A5F"
+                android:startX="256"
+                android:startY="0"
+                android:endX="256"
+                android:endY="512"
+                android:angle="-145"
+                android:type="linear">
+            </gradient>
+        </shape>
+    </item>
+<!--    <item android:drawable="@color/white"/>-->
 
     <item>
-<!--        <bitmap android:src="i" android:gravity="center"/>-->
+        <bitmap android:src="@drawable/ic_bunny" android:gravity="center" />
     </item>
 </layer-list>

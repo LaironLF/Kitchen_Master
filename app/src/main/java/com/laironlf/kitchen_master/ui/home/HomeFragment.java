@@ -28,15 +28,13 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-        img = (ImageView) root.findViewById(R.id.imageView123);
-        String url = "http://developer.alexanderklimov.ru/android/images/android_cat.jpg";
-        Glide
-                .with(root.getContext())
-                .load(url)
-                .into(img);
+//        img = (ImageView) root.findViewById(R.id.imageView123);
+//        String url = "http://developer.alexanderklimov.ru/android/images/android_cat.jpg";
+//        Glide
+//                .with(root.getContext())
+//                .load(url)
+//                .into(img);
 
         return root;
     }
