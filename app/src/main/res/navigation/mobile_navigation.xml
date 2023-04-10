@@ -25,10 +25,19 @@
         android:id="@+id/nav_slideshow"
         android:name="com.laironlf.kitchen_master.ui.slideshow.ReceiptsFragment"
         android:label="@string/nav_recipes_string"
-        tools:layout="@layout/fragment_recipes" />
+        tools:layout="@layout/fragment_recipes" >
+        <action
+            android:id="@+id/action_nav_slideshow_to_introduceRecipe"
+            app:destination="@id/introduceRecipe" />
+    </fragment>
     <fragment
         android:id="@+id/products"
         android:name="com.laironlf.kitchen_master.ui.productList.AddProductFragment"
         android:label="Продукты"
         tools:layout="@layout/fragment_addproducts" />
+    <fragment
+        android:id="@+id/introduceRecipe"
+        android:name="com.laironlf.kitchen_master.ui.introduce_recipe.IntroduceRecipe"
+        android:label="fragment_introduce_recipe"
+        tools:layout="@layout/fragment_introduce_recipe" />
 </navigation>

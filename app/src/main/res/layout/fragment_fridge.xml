@@ -30,6 +30,8 @@
         android:layout_height="match_parent"/>
 
     <LinearLayout
+        android:backgroundTint="#F4C850"
+        android:elevation="5dp"
         android:id="@+id/addProductBtn"
         android:layout_marginBottom="32dp"
         android:layout_marginRight="32dp"
@@ -45,6 +47,7 @@
 
 
         <ImageView
+            android:tint="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/add_btn"/>

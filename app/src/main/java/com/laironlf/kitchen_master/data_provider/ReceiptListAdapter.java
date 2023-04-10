@@ -22,18 +22,20 @@ public class ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter.
     private LayoutInflater inflater;
     private List<Recipe> receipts;
     private Context context;
+    private OnRecipeClickListener onRecipeClickListener;
 
-    public ReceiptListAdapter(Context context, List<Recipe> receipts){
+    public ReceiptListAdapter(Context context, List<Recipe> receipts, OnRecipeClickListener onRecipeClickListener){
         this.receipts = receipts;
         this.inflater = LayoutInflater.from(context);
         this.context = context;
+        this.onRecipeClickListener = onRecipeClickListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = inflater.inflate(R.layout.list_item, viewGroup, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, onRecipeClickListener);
     }
 
     @Override
@@ -59,15 +61,23 @@ public class ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter.
         return receipts.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView ReceiptTitle, ReceiptType;
         ImageView RecipeImage;
+        OnRecipeClickListener onRecipeClickListener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnRecipeClickListener onRecipeClickListener) {
             super(itemView);
+            this.onRecipeClickListener = onRecipeClickListener;
             ReceiptTitle = (TextView) itemView.findViewById(R.id.tv_receiptTitle);
             ReceiptType = (TextView) itemView.findViewById(R.id.tv_receiptType);
             RecipeImage = (ImageView) itemView.findViewById(R.id.imageReceipt);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            onRecipeClickListener.onRecipeClick(getAdapterPosition());
         }
     }
 

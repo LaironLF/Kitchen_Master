@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/add_btn.xml" value="0.209" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/add_btn_back.xml" value="0.3015" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/average_time.xml" value="0.209" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/backrepeat.xml" value="0.343" />
@@ -11,6 +12,7 @@
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/ic_menu_camera.xml" value="0.343" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.209" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/image_shape.xml" value="0.257" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/menu_shape.xml" value="0.208" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/side_nav_bar.xml" value="0.343" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/stl_list_item_back.xml" value="0.274" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/toolbarform.xml" value="0.209" />
@@ -24,6 +26,7 @@
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/fragment_fridge.xml" value="0.3439814814814815" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/fragment_gallery.xml" value="0.33" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/fragment_home.xml" value="0.2927272727272727" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/fragment_introduce_recipe.xml" value="0.2015625" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/fragment_recipes.xml" value="0.3439814814814815" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/fragment_slideshow.xml" value="0.30885416666666665" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/list_item.xml" value="0.33" />
