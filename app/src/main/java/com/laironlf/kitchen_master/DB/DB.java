@@ -57,6 +57,7 @@ public class DB {
                 return;
             }
             try(Statement stmt = connection.createStatement() ) {
+                Log.i("DB", "run: \n" + sql);
                 rs = stmt.executeQuery(sql);
                 this.logic();
                 queryStatus = true;
@@ -185,7 +186,7 @@ public class DB {
                     "	Recipes.Time, " +
                     "	Images.URL " +
                     "FROM `Recipes` " +
-                    "JOIN Сomplexity ON Recipes.ComplexityID = Сomplexity.ComplexityID " +
+                    "JOIN Сomplexity ON Recipes.ComplexityID = Сomplexity.СomplexityID " +
                     "JOIN Type_of_dish ON Recipes.TypeID = Type_of_dish.TypeID " +
                     "LEFT JOIN Images ON Recipes.RecipeID = Images.RecipeID " +
                     "INNER JOIN (" +
@@ -220,7 +221,7 @@ public class DB {
                     "   Recipes.Time, " +
                     "   Images.URL " +
                     "FROM Recipes " +
-                    "JOIN Сomplexity ON Recipes.ComplexityID = Сomplexity.СomplexityID " +
+                    "JOIN Сomplexity ON Recipes.СomplexityID = Сomplexity.СomplexityID " +
                     "JOIN Type_of_dish ON Recipes.TypeID = Type_of_dish.TypeID " +
                     "LEFT JOIN Images ON Recipes.RecipeID = Images.RecipeID";
 
