@@ -172,6 +172,7 @@ public class DB {
     public static GetRecipe getRecipe = new GetRecipe();
     public static class GetRecipe extends Query {
         String preSql;
+        String preSql1;
         String settings;
         public GetRecipe(){
             preSql =
@@ -209,12 +210,30 @@ public class DB {
                     "		HAVING COUNT(IngredientID) " +
                     "	) AS t2 ON t1.tt1 = t2.tt2 " +
                     ") AS t3 ON Recipes.RecipeID = t3.RecipeID";
-            sql = String.format(preSql, "0");
+            preSql1 =
+                    "SELECT " +
+                    "   Recipes.RecipeID, " +
+                    "   Recipes.Name, " +
+                    "   Recipes.Description, " +
+                    "   Сomplexity.Name, " +
+                    "   Type_of_dish.Name, " +
+                    "   Recipes.Time, " +
+                    "   Images.URL " +
+                    "FROM Recipes " +
+                    "JOIN Сomplexity ON Recipes.ComplexityID = Сomplexity.СomplexityID " +
+                    "JOIN Type_of_dish ON Recipes.TypeID = Type_of_dish.TypeID " +
+                    "LEFT JOIN Images ON Recipes.RecipeID = Images.RecipeID";
+
+
+            sql = preSql1;
         }
 
         public void setSettings(String settings){
             this.settings = settings;
             sql = String.format(preSql, settings);
+        }
+        public void setSettings(){
+            sql = preSql1;
         }
 
         @Override
@@ -233,6 +252,39 @@ public class DB {
                 ));
             }
             getRecipe = new GetRecipe();
+        }
+    }
+
+    public static ArrayList<Ingredient> ingredients = new ArrayList<>();
+    public static GetIngredients getIngredients = new GetIngredients();
+    public static class GetIngredients extends Query{
+        private String preSql;
+        public GetIngredients(){
+            sql =
+                    "SELECT Ingredients.IngredientID, Ingredients.Count, Units_of_measurement.Name, Products.Name, Ingredients.RecipeID " +
+                    "FROM Ingredients " +
+                    "JOIN Units_of_measurement ON Units_of_measurement.UnitID = Ingredients.UnitID " +
+                    "JOIN Products ON Products.ProductID = Ingredients.ProductID ";
+            preSql = "WHERE Ingredients.RecipeID = %d";
+        }
+
+        public void setSettings(int recipeID){
+            sql += String.format(preSql, recipeID);
+        }
+
+        @Override
+        public void logic() throws SQLException{
+            ingredients.ensureCapacity(rs.getFetchSize());
+            while(rs.next()){
+                ingredients.add(new Ingredient(
+                        rs.getInt(1),
+                        rs.getFloat(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5)
+                ));
+            }
+            getIngredients = new GetIngredients();
         }
     }
 
