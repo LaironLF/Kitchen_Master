@@ -184,7 +184,7 @@ public class DB {
                     "	Recipes.Time, " +
                     "	Images.URL " +
                     "FROM `Recipes` " +
-                    "JOIN Сomplexity ON Recipes.RecipeID = Сomplexity.СomplexityID " +
+                    "JOIN Сomplexity ON Recipes.СomplexityID = Сomplexity.СomplexityID " +
                     "JOIN Type_of_dish ON Recipes.TypeID = Type_of_dish.TypeID " +
                     "LEFT JOIN Images ON Recipes.RecipeID = Images.RecipeID " +
                     "INNER JOIN (" +
