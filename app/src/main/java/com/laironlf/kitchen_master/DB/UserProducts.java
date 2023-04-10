@@ -40,6 +40,9 @@ public class UserProducts {
     }
     public static String getString(){
         StringBuilder res = new StringBuilder();
+        if (userProducts.size() == 0){
+            return "";
+        }
         for (Product i : userProducts) {
             res.append(i.productID).append(",");
         }
