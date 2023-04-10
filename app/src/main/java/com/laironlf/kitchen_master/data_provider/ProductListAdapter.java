@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ViewHolder> {
 
-    private LayoutInflater inflater;
+    LayoutInflater inflater;
     private ArrayList<Product> products;
     private OnProductClickListener mOnProductClickListener;
 

@@ -53,9 +53,15 @@ public class AddProductFragment extends Fragment implements ProductListAdapter.O
 
     @Override
     public void onProductClick(int i) {
-        Toast.makeText(getActivity().getApplicationContext(), "Продукт \""+ products.get(i).name + "\" добавлен", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity().getApplicationContext(), "Продукт \""+ products.get(i).name + "\" добавлен", Toast.LENGTH_SHORT).show();
+        deleteProduct(i);
     }
 
+
+    private void deleteProduct(int i){
+        mViewModel.deleteProduct(i);
+        productListAdapter.notifyItemRemoved(i);
+    }
 
     private void setupRecyclerView() {
         recyclerView = (RecyclerView) binding.productsRecycler;
@@ -63,10 +69,11 @@ public class AddProductFragment extends Fragment implements ProductListAdapter.O
 
     private void updateRecyclerView() {
         mViewModel.getProducts().observe(getViewLifecycleOwner(), products -> {
+
+//            this.products = products;
             productListAdapter = new ProductListAdapter(root.getContext(), products, this);
             recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
             recyclerView.setAdapter(productListAdapter);
-            this.products = products;
         });
     }
     

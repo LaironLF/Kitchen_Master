@@ -8,12 +8,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.laironlf.kitchen_master.R;
-import com.laironlf.kitchen_master.data_provider.Receipt;
-import com.laironlf.kitchen_master.data_provider.ReceiptListAdapter;
+import com.laironlf.kitchen_master.DB.Recipe;
 import com.laironlf.kitchen_master.databinding.FragmentRecipesBinding;
 
 import java.util.ArrayList;
@@ -23,7 +20,7 @@ public class ReceiptsFragment extends Fragment {
     private FragmentRecipesBinding binding;
 
     private RecyclerView recyclerView;
-    private ArrayList<Receipt> receipts = new ArrayList<Receipt>();
+    private ArrayList<Recipe> receipts = new ArrayList<Recipe>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +38,8 @@ public class ReceiptsFragment extends Fragment {
 
         return root;
     }
+
+
 
     @Override
     public void onDestroyView() {

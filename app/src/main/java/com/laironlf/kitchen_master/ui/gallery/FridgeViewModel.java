@@ -4,16 +4,32 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.laironlf.kitchen_master.DB.Product;
+import com.laironlf.kitchen_master.DB.UserProducts;
+
+import java.util.ArrayList;
+
 public class FridgeViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    private MutableLiveData<ArrayList<Product>> userProducts;
 
     public FridgeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        InitializeUserPoducts();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    private void InitializeUserPoducts() {
+        userProducts = new MutableLiveData<>();
+        userProducts.setValue(UserProducts.userProducts);
     }
+
+    public void deleteProduct(int i){
+        UserProducts.remove(i);
+        UserProducts.writeData();
+    }
+
+
+    public LiveData<ArrayList<Product>> getUserProducts(){
+        return userProducts;
+    }
+
 }
