@@ -228,12 +228,17 @@ public class DB {
             sql = preSql1;
         }
 
-        public void setSettings(String settings){
-            this.settings = settings;
-            sql = String.format(preSql, settings);
-        }
-        public void setSettings(){
-            sql = preSql1;
+        public void setSettings(String settings, int mode){
+            switch (mode){
+                case 0:
+                    this.settings = settings;
+                    sql = String.format(preSql, settings);
+                    break;
+                case 1:
+                    sql = preSql1;
+                    break;
+            }
+
         }
 
         @Override
