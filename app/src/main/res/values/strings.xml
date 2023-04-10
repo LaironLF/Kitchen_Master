@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kitchen_Master</string>
+    <string name="app_name">Кухонный мастер</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
