@@ -77,11 +77,11 @@ public class ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter.
 
         @Override
         public void onClick(View view) {
-            onRecipeClickListener.onRecipeClick(getAdapterPosition());
+            onRecipeClickListener.onRecipeClick(getAdapterPosition(), view);
         }
     }
 
     public interface OnRecipeClickListener{
-        void onRecipeClick(int i);
+        void onRecipeClick(int i, View view);
     }
 }

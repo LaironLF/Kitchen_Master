@@ -18,11 +18,13 @@
         android:theme="@style/Theme.Kitchen_Master"
         tools:targetApi="31">
         <activity
+            android:screenOrientation="portrait"
             android:name=".MainActivity"
             android:exported="false"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.Kitchen_Master.NoActionBar" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".StartSplash"
             android:exported="true"
             android:theme="@style/Theme.Kitchen_Master.NoActionBar">

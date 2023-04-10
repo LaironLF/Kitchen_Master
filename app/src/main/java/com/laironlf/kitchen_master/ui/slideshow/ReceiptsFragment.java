@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,8 +58,9 @@ public class ReceiptsFragment extends Fragment  implements ReceiptListAdapter.On
     }
 
     @Override
-    public void onRecipeClick(int i) {
-        Toast.makeText(getActivity().getApplicationContext(), "КЛИК", Toast.LENGTH_SHORT).show();
+    public void onRecipeClick(int i, View view) {
+//        Toast.makeText(getActivity().getApplicationContext(), "КЛИК", Toast.LENGTH_SHORT).show();
         RecipeDataMediator.setRecipe(recipes.get(i));
+        Navigation.findNavController(view).navigate(R.id.action_nav_slideshow_to_introduceRecipe);
     }
 }
