@@ -1,5 +1,7 @@
 package com.laironlf.kitchen_master.ui.gallery;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -23,6 +25,7 @@ public class FridgeViewModel extends ViewModel {
     }
 
     public void deleteProduct(int i){
+        Log.d("fridgeLog", String.valueOf(i));
         UserProducts.remove(i);
         UserProducts.writeData();
     }

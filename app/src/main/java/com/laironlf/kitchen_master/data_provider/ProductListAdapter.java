@@ -53,6 +53,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView productName;
         OnProductClickListener onProductClickListener;
+        boolean clickable = true;
 
         public ViewHolder(@NonNull View itemView, OnProductClickListener onProductClickListener) {
             super(itemView);
@@ -64,7 +65,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
         @Override
         public void onClick(View view) {
-            onProductClickListener.onProductClick(getAdapterPosition());
+            if(clickable){
+                onProductClickListener.onProductClick(getAdapterPosition());
+                clickable = false;
+            }
         }
     }
 
