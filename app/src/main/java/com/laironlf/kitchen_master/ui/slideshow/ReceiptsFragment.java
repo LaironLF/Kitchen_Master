@@ -51,11 +51,14 @@ public class ReceiptsFragment extends Fragment  implements ReceiptListAdapter.On
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 count = progress;
                 // Здесь вы можете обновить данные на основе нового значения count
+//                Toast.makeText(getActivity().getApplicationContext(), String.valueOf(progress), Toast.LENGTH_SHORT).show();
+                receiptsViewModel.updateRecipes(count);
+                updateRecyclerView();
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(getActivity().getApplicationContext(), "Клик", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity().getApplicationContext(), "Клик", Toast.LENGTH_SHORT).show();
             }
 
             @Override
