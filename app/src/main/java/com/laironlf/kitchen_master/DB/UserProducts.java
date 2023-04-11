@@ -55,13 +55,19 @@ public class UserProducts {
             res.append(i.productID).append(":").append(i.name).append("|");
         }
         res.delete(res.length()-1,res.length());
+//        Log.i(TAG, "stringForWrite: " + res.toString());
         return res.toString();
     }
     public static void writeData(){
-        if (userProducts.size() == 0) return;
+//        Log.i(TAG, "writeData: " + userProducts.size());
+//        if (userProducts.size() == 0) return;
         FileOutputStream fos = null;
         try {
-            String text = stringForWrite();
+            String text;
+            if (userProducts.size() == 0) text = "";
+            else {
+                text = stringForWrite();
+            }
             fos = mContext.openFileOutput(fileName, Context.MODE_PRIVATE);
             fos.write(text.getBytes());
         } catch (IOException | NullPointerException ex) {
@@ -77,6 +83,7 @@ public class UserProducts {
         }
     }
     public static void readData(){
+//        Log.i(TAG, "readData: " + userProducts.size());
         if (userProducts.size() != 0) return;
         FileInputStream fin = null;
         try {
@@ -84,7 +91,9 @@ public class UserProducts {
             byte[] bytes = new byte[fin.available()];
             fin.read(bytes);
             String text = new String(bytes);
-
+            if (text.equals("")){
+                return;
+            }
             String[] t = text.split("\\|");
             userProducts.ensureCapacity(t.length);
             for (String i : t) {
