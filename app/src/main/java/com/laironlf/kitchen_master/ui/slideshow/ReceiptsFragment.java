@@ -55,6 +55,7 @@ public class ReceiptsFragment extends Fragment  implements ReceiptListAdapter.On
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
+                Toast.makeText(getActivity().getApplicationContext(), "Клик", Toast.LENGTH_SHORT).show();
             }
 
             @Override
