@@ -209,7 +209,8 @@ public class DB {
                     "		WHERE ProductID IN(%s) " +
                     "		GROUP BY RecipeID " +
                     "		HAVING COUNT(IngredientID) " +
-                    "	) AS t2 ON t1.tt1 = t2.tt2 " +
+                    "	) AS t2 ON t1.RecipeID = t2.RecipeID" +
+                    "   WHERE t1.tt1 = t2.tt2 " +
                     ") AS t3 ON Recipes.RecipeID = t3.RecipeID";
             preSql1 =
                     "SELECT " +
