@@ -4,12 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scaleY="1"
     tools:context=".ui.slideshow.ReceiptsFragment">
-
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:max="10"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:progress="0"
+        android:progressDrawable="@drawable/seekbar_progress"
+        android:thumb="@drawable/seekbar_thumb"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <LinearLayout
+
         android:id="@+id/MainLayout"
         android:layout_width="600dp"
         android:layout_height="800dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/backrepeat"
         android:orientation="vertical"
         android:rotation="9"
@@ -23,9 +37,12 @@
         app:layout_editor_absoluteY="-100dp">
 
     </LinearLayout>
+
+
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginHorizontal="20dp"
         android:id="@+id/RclV_listReceipts"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="20dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

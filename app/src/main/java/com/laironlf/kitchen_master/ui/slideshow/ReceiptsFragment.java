@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,8 @@ public class ReceiptsFragment extends Fragment  implements ReceiptListAdapter.On
     private ReceiptsViewModel receiptsViewModel;
     private View root;
     private ArrayList<Recipe> recipes;
+    private int count;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         receiptsViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(ReceiptsViewModel.class);
@@ -36,10 +39,29 @@ public class ReceiptsFragment extends Fragment  implements ReceiptListAdapter.On
 
         recyclerView = (RecyclerView) binding.RclVListReceipts;
         updateRecyclerView();
+        setupSeekBar();
 
         return root;
     }
 
+    private void setupSeekBar() {
+        SeekBar seekBar = root.findViewById(R.id.seekBar);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                count = progress;
+                // Здесь вы можете обновить данные на основе нового значения count
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+    }
     public void updateRecyclerView(){
         receiptsViewModel.getRecipes().observe(getViewLifecycleOwner(), recipes -> {
             this.recipes = recipes;

@@ -173,73 +173,14 @@ public class DB {
     public static GetRecipe getRecipe = new GetRecipe();
     public static class GetRecipe extends Query {
         String preSql;
-        String preSql1;
-        String settings;
         public GetRecipe(){
-            preSql =
-                    "SELECT " +
-                    "	Recipes.RecipeID, " +
-                    "	Recipes.Name, " +
-                    "	Recipes.Description, " +
-                    "	Сomplexity.Name, " +
-                    "	Type_of_dish.Name, " +
-                    "	Recipes.Time, " +
-                    "	Images.URL " +
-                    "FROM `Recipes` " +
-                    "JOIN Сomplexity ON Recipes.ComplexityID = Сomplexity.СomplexityID " +
-                    "JOIN Type_of_dish ON Recipes.TypeID = Type_of_dish.TypeID " +
-                    "LEFT JOIN Images ON Recipes.RecipeID = Images.RecipeID " +
-                    "INNER JOIN (" +
-                    "	SELECT " +
-                    "		t1.tt1, " +
-                    "		t1.`RecipeID` " +
-                    "	FROM ( " +
-                    "		SELECT " +
-                    "			COUNT(`IngredientID`) AS tt1, " +
-                    "			Ingredients.`RecipeID` " +
-                    "		FROM `Ingredients` " +
-                    "		GROUP BY Ingredients.RecipeID " +
-                    "		HAVING COUNT(`IngredientID`) " +
-                    "	) AS t1 " +
-                    "	INNER JOIN ( " +
-                    "		SELECT " +
-                    "			COUNT(IngredientID) AS tt2, " +
-                    "			RecipeID " +
-                    "		FROM Ingredients " +
-                    "		WHERE ProductID IN(%s) " +
-                    "		GROUP BY RecipeID " +
-                    "		HAVING COUNT(IngredientID) " +
-                    "	) AS t2 ON t1.RecipeID = t2.RecipeID" +
-                    "   WHERE t1.tt1 = t2.tt2 " +
-                    ") AS t3 ON Recipes.RecipeID = t3.RecipeID";
-            preSql1 =
-                    "SELECT " +
-                    "   Recipes.RecipeID, " +
-                    "   Recipes.Name, " +
-                    "   Recipes.Description, " +
-                    "   Сomplexity.Name, " +
-                    "   Type_of_dish.Name, " +
-                    "   Recipes.Time, " +
-                    "   Images.URL " +
-                    "FROM Recipes " +
-                    "JOIN Сomplexity ON Recipes.СomplexityID = Сomplexity.СomplexityID " +
-                    "JOIN Type_of_dish ON Recipes.TypeID = Type_of_dish.TypeID " +
-                    "LEFT JOIN Images ON Recipes.RecipeID = Images.RecipeID";
-
-
-            sql = preSql1;
+            preSql = "CALL GetFilteredRecipes('%s', %d)";
+            sql = String.format(preSql, "0", 1);
         }
 
-        public void setSettings(String settings, int mode){
-            switch (mode){
-                case 0:
-                    this.settings = settings;
-                    sql = String.format(preSql, settings);
-                    break;
-                case 1:
-                    sql = preSql1;
-                    break;
-            }
+        public void setSettings(String settings, int count){
+            if (settings == "") settings = "0";
+            sql = String.format(preSql, settings, count);
 
         }
 
