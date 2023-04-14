@@ -84,9 +84,9 @@ public class ReceiptsFragment extends Fragment  implements ReceiptListAdapter.On
     }
 
     @Override
-    public void onRecipeClick(int i, View view) {
+    public void onRecipeClick(int i, View view, int recipeID) {
 //        Toast.makeText(getActivity().getApplicationContext(), "КЛИК", Toast.LENGTH_SHORT).show();
-        RecipeDataMediator.setRecipe(recipes.get(i));
+        RecipeDataMediator.setRecipe(recipeID);
         Navigation.findNavController(view).navigate(R.id.action_nav_slideshow_to_introduceRecipe);
     }
 }

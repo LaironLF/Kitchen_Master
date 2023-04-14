@@ -1,5 +1,7 @@
 package com.laironlf.kitchen_master.ui.introduce_recipe;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -21,9 +23,13 @@ public class IntroduceRecipeViewModel extends ViewModel {
 
     private void InitializeRecipeData() {
         DB.getIngredients.start();
+
         recipe = new MutableLiveData<>();
-        recipe.setValue(RecipeDataMediator.getRecipe());
+
+        recipe.setValue(getRecipeByID(RecipeDataMediator.getRecipe()));
         this.ingredients = new MutableLiveData<>();
+
+
 
         try {
             DB.getIngredients.join();
@@ -32,8 +38,10 @@ public class IntroduceRecipeViewModel extends ViewModel {
         }
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         for(Ingredient ingredient: DB.ingredients){
-            if(ingredient.recipeID == RecipeDataMediator.getRecipe().recipeID)
+            if(ingredient.recipeID == RecipeDataMediator.getRecipe()){
                 ingredients.add(ingredient);
+                Log.d("intRec", ingredient.productName);
+            }
         }
         this.ingredients.setValue(ingredients);
         DB.getIngredients = new DB.GetIngredients();
@@ -44,5 +52,12 @@ public class IntroduceRecipeViewModel extends ViewModel {
     }
     public LiveData<Recipe> getRecipe(){
         return recipe;
+    }
+
+    private Recipe getRecipeByID(int recipeID){
+        for (Recipe recipe : DB.recipes)
+            if (recipe.recipeID == recipeID)
+                return recipe;
+        return null;
     }
 }
