@@ -222,6 +222,7 @@ public class DB {
 
         @Override
         public void logic() throws SQLException{
+            ingredients.clear();
             ingredients.ensureCapacity(rs.getFetchSize());
             while(rs.next()){
                 ingredients.add(new Ingredient(
