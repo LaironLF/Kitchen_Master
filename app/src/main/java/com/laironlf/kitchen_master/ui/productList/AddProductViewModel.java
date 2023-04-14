@@ -25,7 +25,7 @@ public class AddProductViewModel extends ViewModel {
         //Создаём локальную копию указывая капасити
         products = new ArrayList<>(DB.products.size());
         //заполняем локальную копию
-        for(Product product: DB.products) products.add(product);
+        products.addAll(DB.products);
         // удаляем из локальной копии те продукты, что уже есть в юзерпродуктс
         for(Product userProduct : UserProducts.userProducts){
             for (Product localProduct : products){
