@@ -15,12 +15,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.google.android.material.navigation.NavigationView
+    
+    <RelativeLayout
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_nav_drawer" />
+        android:layout_gravity = "start">
+        <include
+            layout="@layout/circlemenu_drawer"/>
+    </RelativeLayout>
+
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="-120dp"
+    android:layout_marginTop="54dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/circle_shape"
+        android:backgroundTint="#F2CC8F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:background="@drawable/circle_shape"
+        android:backgroundTint="#E07A5F"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu_vector"
+            app:layout_constraintCircle="@id/center"
+            tools:ignore="MissingConstraints" />
+
+        <LinearLayout
+            android:id="@+id/btn_user"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:background="@drawable/circle_shape"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:backgroundTint="#F4F1DE"
+            app:layout_constraintCircle="@id/center"
+            app:layout_constraintCircleAngle="354"
+            app:layout_constraintCircleRadius="124dp"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_user"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_menu"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/circle_shape"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:backgroundTint="#F2CC8F"
+            app:layout_constraintCircle="@id/center"
+            app:layout_constraintCircleAngle="36"
+            app:layout_constraintCircleRadius="124dp"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_home"/>
+            <TextView
+                android:textSize="11sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Главная"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_favorite"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/circle_shape"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:backgroundTint="#F2CC8F"
+            app:layout_constraintCircle="@id/center"
+            app:layout_constraintCircleAngle="72"
+            app:layout_constraintCircleRadius="124dp"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_favorite"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11sp"
+                android:text="Закладки"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_search"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/circle_shape"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:backgroundTint="#F2CC8F"
+            app:layout_constraintCircle="@id/center"
+            app:layout_constraintCircleAngle="106"
+            app:layout_constraintCircleRadius="124dp"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_search"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11sp"
+                android:text="Поиск"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_settings"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/circle_shape"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:backgroundTint="#F2CC8F"
+            app:layout_constraintCircle="@id/center"
+            app:layout_constraintCircleAngle="142"
+            app:layout_constraintCircleRadius="124dp"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_settings"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11sp"
+                android:text="Настройки"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_fridge"
+            android:layout_width="80dp"
+            android:layout_height="54dp"
+            android:background="@drawable/menu_square_shape"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:backgroundTint="#F4F1DE"
+            app:layout_constraintCircle="@id/center"
+            app:layout_constraintCircleAngle="186"
+            app:layout_constraintCircleRadius="124dp"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_weather"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11sp"
+                android:text="Холодильник"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
