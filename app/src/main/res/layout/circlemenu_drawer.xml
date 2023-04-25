@@ -64,7 +64,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/btn_menu"
+            android:id="@+id/btn_home"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:background="@drawable/circle_shape"

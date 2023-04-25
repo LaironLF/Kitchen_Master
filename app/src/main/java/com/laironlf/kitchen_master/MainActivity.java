@@ -7,10 +7,17 @@
 
 package com.laironlf.kitchen_master;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -28,36 +35,49 @@ import com.laironlf.kitchen_master.DB.DB;
 import com.laironlf.kitchen_master.DB.UserProducts;
 import com.laironlf.kitchen_master.databinding.ActivityMainNavBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainNavBinding binding;
-    DrawerLayout drawer;
+    private DrawerLayout drawer;
+    private RelativeLayout menu;
+    private NavController navController;
 
+    private static final int SWIPE_THRESHOLD = 100;
+    private float initialX;
+    private boolean isDrawerOpen;
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainNavBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Toolbar toolbar = binding.appBarMain.toolbar;
-        setSupportActionBar(toolbar);
 
         drawer = binding.drawerLayout;
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        new AppCircleNavigation(drawer, this);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-    }
-
-    public static void menuSetClickListeners(){
+        menu = binding.navView;
 
     }
 
 
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                drawer.openDrawer(GravityCompat.START);
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onDestroy() {
@@ -65,4 +85,5 @@ public class MainActivity extends AppCompatActivity {
         UserProducts.writeData();
         DB.close();
     }
+
 }

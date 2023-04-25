@@ -9,37 +9,31 @@
     <include layout="@layout/content_main" />
 
     <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/pagesBackColor"
+        android:id="@+id/btn_menu"
+        android:layout_marginTop="26dp"
+        android:layout_marginStart="26dp"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:background="@drawable/toolbarform"
+        android:backgroundTint="#E07A5F"
         android:theme="@style/Theme.Kitchen_Master.AppBarOverlay"
-        app:elevation="0dp"
+        app:elevation="10dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/toolbarform"
-                android:elevation="4dp"
-                android:theme="@style/Theme.Kitchen_Master.NoActionBar"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_menu"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:popupTheme="@style/Theme.Kitchen_Master.PopupOverlay"
-                app:titleTextColor="@color/textColorBrown">
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.appcompat.widget.Toolbar>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
