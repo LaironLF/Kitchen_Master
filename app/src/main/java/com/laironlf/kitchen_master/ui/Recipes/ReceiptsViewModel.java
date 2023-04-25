@@ -1,4 +1,4 @@
-package com.laironlf.kitchen_master.ui.slideshow;
+package com.laironlf.kitchen_master.ui.Recipes;
 
 
 import androidx.lifecycle.LiveData;

@@ -9,11 +9,12 @@
         android:id="@+id/nav_home"
         android:name="com.laironlf.kitchen_master.ui.home.HomeFragment"
         android:label="@string/nav_main_string"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+    </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.laironlf.kitchen_master.ui.gallery.FridgeFragment"
+        android:id="@+id/nav_products"
+        android:name="com.laironlf.kitchen_master.ui.Fridge.FridgeFragment"
         android:label="@string/nav_fridge_string"
         tools:layout="@layout/fragment_fridge" >
         <action
@@ -22,8 +23,8 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.laironlf.kitchen_master.ui.slideshow.ReceiptsFragment"
+        android:id="@+id/nav_recipes"
+        android:name="com.laironlf.kitchen_master.ui.Recipes.ReceiptsFragment"
         android:label="@string/nav_recipes_string"
         tools:layout="@layout/fragment_recipes" >
         <action

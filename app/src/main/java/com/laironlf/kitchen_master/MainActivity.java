@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity{
     private DrawerLayout drawer;
     private RelativeLayout menu;
     private NavController navController;
+    private AppCircleNavigation appCircleNavigation;
 
     private static final int SWIPE_THRESHOLD = 100;
     private float initialX;
@@ -56,34 +57,23 @@ public class MainActivity extends AppCompatActivity{
 
 
         drawer = binding.drawerLayout;
-        new AppCircleNavigation(drawer, this);
+        appCircleNavigation = new AppCircleNavigation(drawer, this);
 
         menu = binding.navView;
-
     }
-
-
-
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            if (drawer.isDrawerOpen(GravityCompat.START)) {
-                drawer.closeDrawer(GravityCompat.START);
-            } else {
-                drawer.openDrawer(GravityCompat.START);
-            }
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    public void onBackPressed() {
+        Toast.makeText(this, "BACK", Toast.LENGTH_SHORT).show();
+        super.onBackPressed();
     }
+
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         UserProducts.writeData();
         DB.close();
+        super.onDestroy();
     }
 
 }

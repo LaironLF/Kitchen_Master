@@ -38,7 +38,7 @@ public class AddProductFragment extends Fragment implements ProductListAdapter.O
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         // setup VM and Binding
-        mViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(AddProductViewModel.class);
+        mViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) new ViewModelProvider.NewInstanceFactory()).get(AddProductViewModel.class);
         binding = FragmentAddproductsBinding.inflate(inflater, container, false);
         root = binding.getRoot();
 

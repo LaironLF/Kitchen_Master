@@ -1,51 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="visible"
     tools:context=".ui.home.HomeFragment">
-
-    <LinearLayout
-        android:id="@+id/MainLayout"
-        android:layout_width="600dp"
-        android:layout_height="800dp"
-        android:background="@drawable/backrepeat"
-        android:orientation="vertical"
-        android:rotation="9"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_editor_absoluteX="-100dp"
-        app:layout_editor_absoluteY="-100dp">
-
-    </LinearLayout>
-
-    <ImageView
-        android:layout_marginTop="100dp"
-        android:id="@+id/imageView123"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_foreground"
-        android:tint="#FFE07A5F"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Демонстрационная версия приложения\n\nВ данной версии производится демонстрация главного функционала:\n - Отбор рецептов по продуктам \n - добавление продуктов в холодильник\n\nВсе данные выводятся из базы данных развёрнутой на сервере"
-        android:textColor="#FFE07A5F"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView123"
-        app:layout_constraintVertical_bias="0.23000002"
-        tools:layout_editor_absoluteX="24dp" />
+        <LinearLayout
+            android:id="@+id/MainLayout"
+            android:layout_width="600dp"
+            android:layout_height="800dp"
+            android:background="@drawable/backrepeat"
+            android:orientation="vertical"
+            android:rotation="9"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.51"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_editor_absoluteX="-100dp"
+            app:layout_editor_absoluteY="-100dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_marginTop="100dp"
+            android:id="@+id/imageView123"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_foreground"
+            android:tint="#FFE07A5F"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Демонстрационная версия приложения\n\nВ данной версии производится демонстрация главного функционала:\n - Отбор рецептов по продуктам \n - добавление продуктов в холодильник\n\nВсе данные выводятся из базы данных развёрнутой на сервере"
+            android:textColor="#FFE07A5F"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView123"
+            app:layout_constraintVertical_bias="0.23000002"
+            tools:layout_editor_absoluteX="24dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

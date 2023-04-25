@@ -1,11 +1,10 @@
-package com.laironlf.kitchen_master.ui.slideshow;
+package com.laironlf.kitchen_master.ui.Recipes;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -33,7 +32,7 @@ public class ReceiptsFragment extends Fragment  implements ReceiptListAdapter.On
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        receiptsViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(ReceiptsViewModel.class);
+        receiptsViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) new ViewModelProvider.NewInstanceFactory()).get(ReceiptsViewModel.class);
         binding = FragmentRecipesBinding.inflate(inflater, container, false);
         root = binding.getRoot();
 

@@ -1,4 +1,4 @@
-package com.laironlf.kitchen_master.ui.gallery;
+package com.laironlf.kitchen_master.ui.Fridge;
 
 import android.util.Log;
 
