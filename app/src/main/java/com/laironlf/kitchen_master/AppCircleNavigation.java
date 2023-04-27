@@ -7,12 +7,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -34,6 +39,8 @@ public class AppCircleNavigation implements View.OnTouchListener {
     private float initialX;
     private final float SWIPE_THRESHOLD = 150;
     private LinearLayout btn_user, btn_home, btn_search, btn_favorites, btn_settings, btn_fridge;
+    private ImageView btn_home_iv, btn_search_iv, btn_favorites_iv, btn_settings_iv, btn_fridge_iv;
+    private TextView btn_home_tv, btn_search_tv, btn_favorites_tv, btn_settings_tv, btn_fridge_tv;
     private NavController navController;
     private Fragment selectedFragment;
 
@@ -50,11 +57,12 @@ public class AppCircleNavigation implements View.OnTouchListener {
         drawerLayout.setOnTouchListener(this);
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, GravityCompat.START);
         navController = Navigation.findNavController((Activity) activity, R.id.nav_host_fragment_content_main);
-        ItemAnimations itemAnimations = new ItemAnimations();
-        itemAnimations.SetNavController(navController);
 
         findViews();
         menuSetClickListeners();
+
+        ItemAnimations itemAnimations = new ItemAnimations();
+        itemAnimations.SetNavController(navController);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -86,13 +94,45 @@ public class AppCircleNavigation implements View.OnTouchListener {
         return false;
     }
 
+    // Опишем функции открытия закрытия для доступа из главного активити
+    // Сделал передачу гравити, ну вдруг захочу сделать версию менюшки на другую сторону
+    public void openDrawer(int gravityCompat){
+        drawerLayout.openDrawer(gravityCompat);
+    }
+    public void closeDrawer(int gravityCompat){
+        drawerLayout.closeDrawer(gravityCompat);
+    }
+
+    // Найдём всё вьюшки для менюшки
     private void findViews(){
+        // --------------------------
+        // БЕРИ ТОПОР РУБИ ХАРДКООООД!
+        // почему я не сделал архитектуру по-другому??((((
+        // --------------------------
+
+        // Find LinearLayouts
         btn_user = drawerLayout.findViewById(R.id.btn_user);
         btn_home = drawerLayout.findViewById(R.id.btn_home);
         btn_search = drawerLayout.findViewById(R.id.btn_search);
         btn_favorites = drawerLayout.findViewById(R.id.btn_favorite);
         btn_settings = drawerLayout.findViewById(R.id.btn_settings);
         btn_fridge = drawerLayout.findViewById(R.id.btn_fridge);
+
+        //find textView's
+
+        btn_home_tv = drawerLayout.findViewById(R.id.btn_home_tv);
+        btn_favorites_tv = drawerLayout.findViewById(R.id.btn_favorite_tv);
+        btn_search_tv = drawerLayout.findViewById(R.id.btn_search_tv);
+        btn_settings_tv = drawerLayout.findViewById(R.id.btn_settings_tv);
+        btn_fridge = drawerLayout.findViewById(R.id.btn_fridge_tv);
+
+        //find imageView's
+
+        btn_home_iv = drawerLayout.findViewById(R.id.btn_home_iv);
+        btn_favorites_iv = drawerLayout.findViewById(R.id.btn_favorite_iv);
+        btn_search_iv = drawerLayout.findViewById(R.id.btn_search_iv);
+        btn_settings_iv = drawerLayout.findViewById(R.id.btn_settings_iv);
+        btn_fridge_iv = drawerLayout.findViewById(R.id.btn_fridge_iv);
     }
 
     private void menuSetClickListeners(){
@@ -108,18 +148,48 @@ public class AppCircleNavigation implements View.OnTouchListener {
         }
     }
 
-    private static class ItemAnimations implements NavController.OnDestinationChangedListener {
+    private class ItemAnimations implements NavController.OnDestinationChangedListener {
 
-        private static NavController navController;
+        private NavController navController;
+        private Animation animation;
 
-        public void SetNavController(NavController navController){
-            ItemAnimations.navController = navController;
-            ItemAnimations.navController.addOnDestinationChangedListener(this);
+        public ItemAnimations(){
+            animation = AnimationUtils.loadAnimation(activity, R.anim.click_animation);
         }
 
+        public void SetNavController(NavController navController){
+            this.navController = navController;
+            this.navController.addOnDestinationChangedListener(this);
+        }
+
+
+        public void buttonAnimate(LinearLayout btn_name){
+            btn_name.startAnimation(animation);
+        }
+
+        @SuppressLint("NonConstantResourceId")
         @Override
         public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-            Toast.makeText(activity, "CHANGED", Toast.LENGTH_SHORT).show();
+            switch (destination.getId()){
+                case R.id.nav_home:
+                    buttonAnimate(btn_home);
+                    break;
+                case R.id.nav_recipes:
+                    buttonAnimate(btn_search);
+                    break;
+                case R.id.nav_products:
+                    buttonAnimate(btn_fridge);
+                    break;
+            }
+
+
+//            if(destination.getId() == R.id.nav_recipes){
+////                btn_search.getBackground().setTint(activity.getColor(R.color.purple_500));
+////                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) btn_search.getLayoutParams();
+////                layoutParams.circleAngle = 90.0f;
+////                btn_search.setLayoutParams(layoutParams);
+//                btn_search.startAnimation(animation);
+//            }
         }
     }
 

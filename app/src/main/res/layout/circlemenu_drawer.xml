@@ -77,10 +77,12 @@
             tools:ignore="MissingConstraints">
 
             <ImageView
+                android:id="@+id/btn_home_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_home"/>
             <TextView
+                android:id="@+id/btn_home_tv"
                 android:textSize="10sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -101,14 +103,16 @@
             tools:ignore="MissingConstraints">
 
             <ImageView
+                android:id="@+id/btn_favorite_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_favorite"/>
             <TextView
+                android:id="@+id/btn_favorite_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="Закладки"/>
+                android:text="Избранные"/>
         </LinearLayout>
 
         <LinearLayout
@@ -125,10 +129,12 @@
             tools:ignore="MissingConstraints">
 
             <ImageView
+                android:id="@+id/btn_search_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_search"/>
             <TextView
+                android:id="@+id/btn_search_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
@@ -149,10 +155,12 @@
             tools:ignore="MissingConstraints">
 
             <ImageView
+                android:id="@+id/btn_settings_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_settings"/>
             <TextView
+                android:id="@+id/btn_settings_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
@@ -173,15 +181,19 @@
             tools:ignore="MissingConstraints">
 
             <ImageView
+                android:id="@+id/btn_fridge_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_weather"/>
             <TextView
+                android:id="@+id/btn_fridge_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:text="Холодильник"/>
         </LinearLayout>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
