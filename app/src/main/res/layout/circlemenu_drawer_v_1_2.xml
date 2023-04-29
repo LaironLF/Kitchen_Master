@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="-120dp"
+    android:layout_marginTop="54dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/circle_menu_back"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/circle_shape"
+        android:backgroundTint="#F2CC8F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/circle_menu_main"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:background="@drawable/circle_shape"
+        android:backgroundTint="#E07A5F"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu_vector"
+            app:layout_constraintCircle="@id/center"
+            tools:ignore="MissingConstraints" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.laironlf.kitchen_master.circle_menu.RadioButtonCenter
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/circle_shape"
+
+                app:layout_constraintCircle="@id/center"
+                app:layout_constraintCircleAngle="354"
+                app:layout_constraintCircleRadius="124dp"/>
+        </RadioGroup>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

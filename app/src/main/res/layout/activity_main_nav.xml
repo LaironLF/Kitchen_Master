@@ -22,7 +22,7 @@
         android:layout_height="match_parent"
         android:layout_gravity = "start">
         <include
-            layout="@layout/circlemenu_drawer"/>
+            layout="@layout/circlemenu_drawer_v_1_2"/>
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
