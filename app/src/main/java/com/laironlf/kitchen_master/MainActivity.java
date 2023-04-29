@@ -73,7 +73,13 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onDestroy() {
         UserProducts.writeData();
-        DB.close();
+//        DB.close();
+        DB.closeConnectionToDataBase.start();
+        try {
+            DB.closeConnectionToDataBase.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         super.onDestroy();
     }
 

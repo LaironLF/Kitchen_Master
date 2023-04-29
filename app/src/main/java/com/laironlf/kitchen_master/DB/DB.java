@@ -278,12 +278,25 @@ public class DB {
 //
 //    }
 
-    public static void close() {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            Log.e("BD", "close: \n" + e);
+//    public static void close() {
+//        try {
+//            connection.close();
+//        } catch (SQLException e) {
+//            Log.e("BD", "close: \n" + e);
+//        }
+//    }
+
+    static public Close closeConnectionToDataBase = new Close();
+
+    public static class Close extends Thread {
+        public void run() {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                Log.e("BD", "close: \n" + e);
+            }
         }
     }
+
 }
 
