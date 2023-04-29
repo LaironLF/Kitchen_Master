@@ -48,7 +48,7 @@ public class DB {
         protected boolean queryStatus;
         protected ResultSet rs;
         protected abstract void logic() throws SQLException;
-
+        protected abstract void end();
         public void run() {
             if (!conStatus) {
                 return;
@@ -66,6 +66,7 @@ public class DB {
                 queryStatus = false;
                 Log.e("DB", "query: \n" + e);
             }
+            this.end();
         }
     }
 
@@ -159,7 +160,10 @@ public class DB {
         public GetProducts(){
             sql = "SELECT * FROM Products";
         }
-
+        @Override
+        protected void end(){
+            getProducts = new GetProducts();
+        }
         @Override
         protected void logic() throws SQLException {
             products.ensureCapacity(rs.getFetchSize());
@@ -184,7 +188,10 @@ public class DB {
             sql = String.format(preSql, settings, count);
 
         }
-
+        @Override
+        protected void end(){
+            getRecipe = new GetRecipe();
+        }
         @Override
         protected void logic() throws SQLException{
             recipes.clear();
@@ -220,7 +227,10 @@ public class DB {
         public void setSettings(int recipeID){
             sql += String.format(preSql, recipeID);
         }
-
+        @Override
+        protected void end(){
+            getIngredients = new GetIngredients();
+        }
         @Override
         public void logic() throws SQLException{
             ingredients.clear();
