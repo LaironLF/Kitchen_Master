@@ -306,6 +306,7 @@ public class DB {
             } catch (SQLException e) {
                 Log.e("BD", "close: \n" + e);
             }
+            closeConnectionToDataBase = new Close();
         }
     }
 
