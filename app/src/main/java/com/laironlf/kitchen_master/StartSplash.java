@@ -20,7 +20,7 @@ public class StartSplash extends AppCompatActivity {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        DB.connectionToDataBase.destroy();
+        DB.connectionToDataBase.interrupt();
         DB.getProducts.start();
         try {
             DB.getProducts.join();
