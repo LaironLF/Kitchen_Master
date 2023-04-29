@@ -39,6 +39,7 @@ public class DB {
                 e.printStackTrace();
                 conStatus = false;
             }
+            connectionToDataBase = new Connect();
         }
     }
 
