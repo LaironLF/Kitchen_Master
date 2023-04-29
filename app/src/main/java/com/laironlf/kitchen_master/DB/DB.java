@@ -21,7 +21,7 @@ public class DB {
     static private final String url = String.format("jdbc:mysql://%s:%d/%s", server, port, database);
 
     static Connection connection = null;
-    static private boolean conStatus;
+    static public boolean conStatus;
     static public Connect connectionToDataBase = new Connect();
 
     public static class Connect extends Thread {

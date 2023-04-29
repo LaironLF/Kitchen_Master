@@ -14,13 +14,15 @@ public class StartSplash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = new Intent(this, MainActivity.class);
-        DB.connectionToDataBase.start();
-        try {
-            DB.connectionToDataBase.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        if (!DB.conStatus){
+            DB.connectionToDataBase.start();
+            try {
+                DB.connectionToDataBase.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
-        DB.connectionToDataBase.interrupt();
+
         DB.getProducts.start();
         try {
             DB.getProducts.join();
