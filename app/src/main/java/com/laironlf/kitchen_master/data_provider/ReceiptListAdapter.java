@@ -16,7 +16,7 @@ import com.laironlf.kitchen_master.R;
 
 import java.util.List;
 
-public class ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter.ViewHolder> {
+public class  ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter.ViewHolder> {
     private LayoutInflater inflater;
     private List<Recipe> recipes;
     private Context context;

@@ -11,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
@@ -56,14 +57,13 @@ public class MainActivity extends AppCompatActivity{
 
         drawer = binding.drawerLayout;
         AppCircleNavigation.createCircleMenu(drawer, this, menu);
-
-        btn_menu = binding.appBarMain.btnMenu;
 //        btn_menu.setOnClickListener(view -> appCircleNavigation.openDrawer(GravityCompat.START));
     }
 
     @Override
     public void onBackPressed() {
         if(drawer.isDrawerOpen(GravityCompat.START)){
+            AppCircleNavigation.closeDrawer();
             return;
         }
         Toast.makeText(this, "BACK", Toast.LENGTH_SHORT).show();
@@ -76,5 +76,4 @@ public class MainActivity extends AppCompatActivity{
         DB.close();
         super.onDestroy();
     }
-
 }

@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,10 +17,11 @@ import com.laironlf.kitchen_master.R;
 import com.laironlf.kitchen_master.data_provider.ReceiptListAdapter;
 import com.laironlf.kitchen_master.data_provider.RecipeDataMediator;
 import com.laironlf.kitchen_master.databinding.FragmentRecipesBinding;
+import com.laironlf.kitchen_master.ui.BaseFragment;
 
 import java.util.ArrayList;
 
-public class ReceiptsFragment extends Fragment  implements ReceiptListAdapter.OnRecipeClickListener{
+public class ReceiptsFragment extends BaseFragment implements ReceiptListAdapter.OnRecipeClickListener {
 
     private FragmentRecipesBinding binding;
     private RecyclerView recyclerView;

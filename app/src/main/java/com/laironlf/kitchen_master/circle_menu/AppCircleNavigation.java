@@ -1,15 +1,19 @@
 package com.laironlf.kitchen_master.circle_menu;
 
+import static android.content.ContentValues.TAG;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Switch;
+import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -37,9 +41,12 @@ public class AppCircleNavigation {
         AppCircleNavigation.activity = activity;
         AppCircleNavigation.menu = menu;
         // Инициализируем подклассы
-        RadioButtonGroup.InitGroup(menu.size());
         AppNavigation.initNavigation(activity, R.id.nav_host_fragment_content_main);
+        RadioButtonGroup.initGroup(menu.size());
         // Начинаем создавать меню
+        DrawerLayoutGestures.initGestures(drawerLayout);
+        DrawerLayoutMotion.initMotion(drawerLayout);
+
         circleMenu = drawerLayout.findViewById(R.id.circle_menu_main);
         createMenuItems();
     }
@@ -53,8 +60,6 @@ public class AppCircleNavigation {
     public static AppCircleNavigation getCircleMenu(){
         return appCircleNavigation;
     }
-
-    @SuppressLint("ResourceType")
     private static void createMenuItems() {
         // Достаём нужные величины из ресурсов
         int diameter = (int)activity.getResources().getDimension(R.dimen.circle_nav_item_diameter);
@@ -78,7 +83,7 @@ public class AppCircleNavigation {
             else if(i == menu.size() -1){
                 params = new ConstraintLayout.LayoutParams(width, height);
                 params.circleAngle = 186;
-                radioButtonCenter.setBackground(activity.getResources().getDrawable(R.drawable.menu_square_shape, activity.getTheme()));
+                radioButtonCenter.setBackground(activity.getResources().getDrawable(R.drawable.circle_nav_square_selector, activity.getTheme()));
             }
             else{
                 params = new ConstraintLayout.LayoutParams(diameter, diameter);
@@ -101,7 +106,20 @@ public class AppCircleNavigation {
             circleMenu.addView(radioButtonCenter);
             RadioButtonGroup.addRadioButton(radioButtonCenter);
         }
+        RadioButtonGroup.setCurrentRadioButton(AppNavigation.getCurrentDestination());
     }
+
+    public static void openDrawer(){
+        drawerLayout.openDrawer(GravityCompat.START);
+    }
+    public static void closeDrawer() {drawerLayout.closeDrawer(GravityCompat.START);}
+    public static boolean isDrawerOpen(){
+        return drawerLayout.isDrawerOpen(GravityCompat.START);
+    }
+    public static void lockDrawer() {
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN, GravityCompat.START);
+    }
+    public static void unlockDrawer() { drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, GravityCompat.START);}
 
     /*
     | ---- ПОДКЛАССЫ ООУЕААА ---- |
@@ -114,8 +132,14 @@ public class AppCircleNavigation {
         private static RadioButtonCenter currentRadioButton;
 
         // Создаём группу, и передаём количество радиобаттонов
-        public static void InitGroup(int count){
+        public static void initGroup(int count){
             radioButtons = new ArrayList<>(count);
+        }
+        public static void setCurrentRadioButton (int idDestination){
+            for(RadioButtonCenter btn : radioButtons)
+                if(btn.getId() == idDestination)
+                    currentRadioButton = btn;
+            currentRadioButton.setChecked(true);
         }
 
         // Добавляем кнопки в массив кнопок
@@ -128,7 +152,7 @@ public class AppCircleNavigation {
 
                 radioButtonCenter.setChecked(true);
 
-                if(currentRadioButton != radioButtonCenter){
+                if(radioButtonCenter != currentRadioButton){
                     currentRadioButton = radioButtonCenter;
                     AppNavigation.navigate(currentRadioButton.getId());
                 }
@@ -152,6 +176,10 @@ public class AppCircleNavigation {
             navController = Navigation.findNavController(activity, id);
         }
 
+        public static int getCurrentDestination(){
+            return navController.getCurrentDestination().getId();
+        }
+
         public static void navigate(int idDestination){
             navController.popBackStack();
             navController.navigate(idDestination);
@@ -164,12 +192,18 @@ public class AppCircleNavigation {
     public static class DrawerLayoutGestures implements View.OnTouchListener {
         // variables
         private static DrawerLayoutGestures drawerLayoutGestures;
+        private float initialX;
+        private float initialY;
+        private static final float xValueToReact = 20;
+        private static final float xVelocityToReact = 300;
+        private boolean mDragging;
+        private static final float axisYFactor = 0.3F;
 
         // Конструктор
         private DrawerLayoutGestures(DrawerLayout drawerLayout){
             drawerLayout.setOnTouchListener(this);
         }
-        public static void InitGestures(DrawerLayout drawerLayout){
+        public static void initGestures(DrawerLayout drawerLayout){
             drawerLayoutGestures = new DrawerLayoutGestures(drawerLayout);
         }
 
@@ -182,9 +216,97 @@ public class AppCircleNavigation {
         public boolean onTouch(View view, MotionEvent motionEvent) {
             switch(motionEvent.getAction()){
                 case MotionEvent.ACTION_DOWN:
-                    Log.d("circleApp", String.valueOf(motionEvent.getX()));
+                    initialX = motionEvent.getRawX();
+                    initialY = motionEvent.getRawY();
+                    mDragging = true;
+                    Log.d(TAG, "onTouch: here");
+                    return true;
+
+                case MotionEvent.ACTION_MOVE:
+                    float deltaX = motionEvent.getRawX() - initialX;
+                    float deltaY = motionEvent.getRawY() - initialY;
+                    Log.d(TAG, "onTouch: dx, dy" +deltaX +" " +deltaY + " " +mDragging);
+
+                    // Обработка движений влево-вправо
+                    if(mDragging && Math.abs(deltaX * axisYFactor) > Math.abs(deltaY)){
+                        if(!isDrawerOpen() && deltaX > xValueToReact){
+                            openDrawer();
+                            mDragging = false;
+                            return true;
+                        }
+                        // влево
+                        if(isDrawerOpen() && -deltaX > xValueToReact){
+                            unlockDrawer();
+                            mDragging = false;
+                            return true;
+                        }
+                    }
+
+                    break;
+
+                case MotionEvent.ACTION_UP:
+                    mDragging = false;
+                    break;
+                case MotionEvent.ACTION_CANCEL:
+
+                    break;
             }
             return false;
+        }
+    }
+
+    public static class DrawerLayoutMotion implements DrawerLayout.DrawerListener{
+        // Единоличник наверное избыточен
+        private static DrawerLayoutMotion drawerLayoutMotion;
+        //Вариэбле
+        public static float motionX = 0;
+        public static int state = 0;
+
+        // Конструктор
+        private DrawerLayoutMotion(DrawerLayout drawerLayout){
+            drawerLayout.addDrawerListener(this);
+        }
+        public static void initMotion(DrawerLayout drawerLayout){
+            drawerLayoutMotion = new DrawerLayoutMotion(drawerLayout);
+        }
+
+        // попрежнему можем отдать его
+        public static DrawerLayoutMotion getDrawerLayoutMotion() {
+            return drawerLayoutMotion;
+        }
+
+        // методы
+
+
+        @Override
+        public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+//            Log.d(TAG, "onDrawerSlide: " + slideOffset);
+//            drawerView.setScaleX(slideOffset);
+//            drawerView.setScaleY(slideOffset);
+            if(slideOffset == 1.0)
+                lockDrawer();
+        }
+
+        @Override
+        public void onDrawerOpened(@NonNull View drawerView) {
+//            Log.d(TAG, "onDrawerOpened: openn)");
+//            activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);;
+        }
+
+        @Override
+        public void onDrawerClosed(@NonNull View drawerView) {
+//            Log.d(TAG, "onDrawerClosed: close)");w
+//            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        }
+
+        @Override
+        public void onDrawerStateChanged(int newState) {
+            /**
+             * 0 - стабильно стоит
+             * 1 - следование за пальцем
+             * 2 - автодоводчик до закрытия, открытия, пальца
+             */
+            Log.d(TAG, "onDrawerStateChanged: " + newState);
         }
     }
 

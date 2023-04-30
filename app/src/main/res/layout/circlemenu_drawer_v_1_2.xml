@@ -46,20 +46,6 @@
             app:layout_constraintCircle="@id/center"
             tools:ignore="MissingConstraints" />
 
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <com.laironlf.kitchen_master.circle_menu.RadioButtonCenter
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:background="@drawable/circle_shape"
-
-                app:layout_constraintCircle="@id/center"
-                app:layout_constraintCircleAngle="354"
-                app:layout_constraintCircleRadius="124dp"/>
-        </RadioGroup>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
