@@ -7,6 +7,8 @@
 
 package com.laironlf.kitchen_master;
 
+import static android.content.ContentValues.TAG;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
@@ -75,5 +77,12 @@ public class MainActivity extends AppCompatActivity{
         UserProducts.writeData();
         DB.close();
         super.onDestroy();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        boolean b = AppCircleNavigation.DrawerLayoutGestures.getGestures().onTouch(drawer, ev);
+//        Log.d(TAG, "dispatchTouchEvent: state " + b);
+        return super.dispatchTouchEvent(ev);
     }
 }

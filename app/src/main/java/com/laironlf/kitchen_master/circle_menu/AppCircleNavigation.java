@@ -202,6 +202,7 @@ public class AppCircleNavigation {
         // Конструктор
         private DrawerLayoutGestures(DrawerLayout drawerLayout){
             drawerLayout.setOnTouchListener(this);
+            drawerLayout.findViewById(R.id.nav_view).setOnTouchListener(this);
         }
         public static void initGestures(DrawerLayout drawerLayout){
             drawerLayoutGestures = new DrawerLayoutGestures(drawerLayout);
@@ -219,33 +220,33 @@ public class AppCircleNavigation {
                     initialX = motionEvent.getRawX();
                     initialY = motionEvent.getRawY();
                     mDragging = true;
-                    Log.d(TAG, "onTouch: here");
+//                    Log.d(TAG, "onTouch: here");
                     return true;
 
                 case MotionEvent.ACTION_MOVE:
                     float deltaX = motionEvent.getRawX() - initialX;
                     float deltaY = motionEvent.getRawY() - initialY;
-                    Log.d(TAG, "onTouch: dx, dy" +deltaX +" " +deltaY + " " +mDragging);
+//                    Log.d(TAG, "onTouch: dx, dy" +deltaX +" " +deltaY + " " +mDragging);
 
                     // Обработка движений влево-вправо
                     if(mDragging && Math.abs(deltaX * axisYFactor) > Math.abs(deltaY)){
                         if(!isDrawerOpen() && deltaX > xValueToReact){
                             openDrawer();
                             mDragging = false;
+//                            break;
                             return true;
                         }
                         // влево
                         if(isDrawerOpen() && -deltaX > xValueToReact){
                             unlockDrawer();
                             mDragging = false;
-                            return true;
+//                            return true;
                         }
                     }
-
                     break;
 
                 case MotionEvent.ACTION_UP:
-                    mDragging = false;
+                    mDragging = true;
                     break;
                 case MotionEvent.ACTION_CANCEL:
 
@@ -277,13 +278,16 @@ public class AppCircleNavigation {
 
         // методы
 
+        public static int getState() {
+            return state;
+        }
 
         @Override
         public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
 //            Log.d(TAG, "onDrawerSlide: " + slideOffset);
 //            drawerView.setScaleX(slideOffset);
 //            drawerView.setScaleY(slideOffset);
-            if(slideOffset == 1.0)
+            if(slideOffset == 1.0 && DrawerLayoutGestures.drawerLayoutGestures.mDragging)
                 lockDrawer();
         }
 
@@ -306,6 +310,7 @@ public class AppCircleNavigation {
              * 1 - следование за пальцем
              * 2 - автодоводчик до закрытия, открытия, пальца
              */
+            state = newState;
             Log.d(TAG, "onDrawerStateChanged: " + newState);
         }
     }

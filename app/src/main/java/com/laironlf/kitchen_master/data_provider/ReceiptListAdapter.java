@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.laironlf.kitchen_master.DB.Recipe;
 import com.laironlf.kitchen_master.R;
+import com.laironlf.kitchen_master.circle_menu.AppCircleNavigation;
 
 import java.util.List;
 
@@ -75,6 +76,7 @@ public class  ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter
 
         @Override
         public void onClick(View view) {
+            if(AppCircleNavigation.DrawerLayoutMotion.getState() == 2) return;
             onRecipeClickListener.onRecipeClick(getAdapterPosition(), view, recipes.get(getAdapterPosition()).recipeID);
         }
     }
