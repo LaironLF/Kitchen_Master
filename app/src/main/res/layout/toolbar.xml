@@ -7,8 +7,8 @@
     android:fitsSystemWindows="true">
 
     <ImageButton
-        android:layout_marginVertical="12dp"
         android:elevation="2dp"
+        android:layout_marginVertical="12dp"
         android:id="@+id/imageButton"
         android:layout_width="44dp"
         android:layout_height="44dp"
@@ -22,7 +22,7 @@
         tools:ignore="ContentDescription" />
 
     <RelativeLayout
-        android:elevation="8dp"
+        android:elevation="2dp"
         android:layout_width="0dp"
         android:layout_height="44dp"
         android:layout_marginStart="8dp"
