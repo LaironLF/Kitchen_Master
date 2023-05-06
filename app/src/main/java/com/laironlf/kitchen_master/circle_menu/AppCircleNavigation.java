@@ -123,10 +123,6 @@ public class AppCircleNavigation {
     }
     public static void unlockDrawer() { drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, GravityCompat.START);}
 
-                    /*----------------------------
-                    |      ПОДКЛАССЫ ОУЕЕААА     |
-                    ----------------------------*/
-
     /**
      * <p>Мой личный статичный класс радиогруппы, потому что view элемент мне не подходит</p>
      */
@@ -426,4 +422,6 @@ public class AppCircleNavigation {
         }
 
     }
+
+//    public static class drawerToggle
 }

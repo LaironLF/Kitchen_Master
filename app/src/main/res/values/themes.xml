@@ -2,16 +2,21 @@
     <!-- Base application theme. -->
     <style name="Theme.Kitchen_Master" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/statusBar</item>
+        <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/white</item>
         <item name="colorAccent">@color/teal_200</item>
-        <item name="pagesBackColor">@color/statusBar</item>
         <!-- Customize your theme here. -->
-        <item name="android:windowBackground">@color/windowBack</item>
-        <item name="android:navigationBarColor">?attr/pagesBackColor</item>
-        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:navigationBarColor">@color/night_back</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="itemBlockColor">@color/itemBlockColorDay</item>
+        <item name="navUIElementColor">@color/orange_day</item>
+        <item name="titleItemTextColor">@color/black</item>
+
     </style>
-    <attr name="pagesBackColor" format="reference"/>
+    <attr name="itemBlockColor" format="color"/>
+    <attr name="navUIElementColor" format="color"/>
+    <attr name="titleItemTextColor" format="color"/>
 
     <style name="Theme.Kitchen_Master.NoActionBar">
 
@@ -21,8 +26,9 @@
 
     <style name="SplasScreen" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/background_splashscreen</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:fitsSystemWindows">true</item>
     </style>
 
     <style name="Theme.Kitchen_Master.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

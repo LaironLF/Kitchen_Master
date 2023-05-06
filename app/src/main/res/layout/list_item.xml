@@ -7,6 +7,7 @@
     android:elevation="5dp"
     android:layout_height="wrap_content"
     android:background="@drawable/stl_list_item_back"
+    android:backgroundTint="?attr/itemBlockColor"
     android:layout_marginVertical="18dp">
 
     <LinearLayout
@@ -33,20 +34,27 @@
 
 
         <TextView
+            android:layout_marginVertical="8dp"
+            android:textAlignment="center"
             android:id="@+id/tv_receiptTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
             android:text="Test title"
-            android:textColor="@color/black"
+            android:textColor="?attr/titleItemTextColor"
             android:textSize="24sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="?attr/navUIElementColor"/>
 
         <TextView
+            android:textAlignment="center"
             android:id="@+id/tv_receiptType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="test type"
-            android:textSize="24sp"/>
+            android:textSize="16sp"/>
     </LinearLayout>
 
 
