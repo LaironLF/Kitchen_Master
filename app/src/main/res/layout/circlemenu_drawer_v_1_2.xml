@@ -6,7 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="-120dp"
-    android:layout_marginTop="54dp">
+    android:layout_marginTop="@dimen/stndTopMargin">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/circle_menu_back"
@@ -23,12 +23,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/circle_menu_main"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
+        android:layout_width="@dimen/circle_menu_diameter"
+        android:layout_height="@dimen/circle_menu_diameter"
         android:background="@drawable/circle_shape"
-        android:backgroundTint="#E07A5F"
+        android:backgroundTint="?attr/navUIElementColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
 
         <View
             android:id="@+id/center"
@@ -45,20 +46,6 @@
             android:src="@drawable/menu_vector"
             app:layout_constraintCircle="@id/center"
             tools:ignore="MissingConstraints" />
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <com.laironlf.kitchen_master.circle_menu.RadioButtonCenter
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:background="@drawable/circle_shape"
-
-                app:layout_constraintCircle="@id/center"
-                app:layout_constraintCircleAngle="354"
-                app:layout_constraintCircleRadius="124dp"/>
-        </RadioGroup>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Theme.Kitchen_Master" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/white</item>
         <item name="colorAccent">@color/teal_200</item>
-        <item name="pagesBackColor">@color/statusBar</item>
         <!-- Customize your theme here. -->
-        <item name="android:windowBackground">@color/windowBack</item>
+        <item name="android:windowBackground">@color/white</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">?attr/pagesBackColor</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
+        <item name="itemBlockColor">@color/itemBlockColorDay</item>
+        <item name="titleItemTextColor">@color/black</item>
+        <item name="navUIElementColor">@color/orange_day</item>
     </style>
 </resources>

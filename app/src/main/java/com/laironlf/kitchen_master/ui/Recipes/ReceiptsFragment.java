@@ -1,7 +1,9 @@
 package com.laironlf.kitchen_master.ui.Recipes;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
@@ -15,13 +17,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.laironlf.kitchen_master.DB.Recipe;
 import com.laironlf.kitchen_master.R;
+import com.laironlf.kitchen_master.circle_menu.AppCircleNavigation;
 import com.laironlf.kitchen_master.data_provider.ReceiptListAdapter;
 import com.laironlf.kitchen_master.data_provider.RecipeDataMediator;
 import com.laironlf.kitchen_master.databinding.FragmentRecipesBinding;
 
 import java.util.ArrayList;
 
-public class ReceiptsFragment extends Fragment  implements ReceiptListAdapter.OnRecipeClickListener{
+public class ReceiptsFragment extends Fragment implements ReceiptListAdapter.OnRecipeClickListener, View.OnTouchListener {
 
     private FragmentRecipesBinding binding;
     private RecyclerView recyclerView;
@@ -31,12 +34,13 @@ public class ReceiptsFragment extends Fragment  implements ReceiptListAdapter.On
     private int count;
 
 
+    @SuppressLint("ClickableViewAccessibility")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         receiptsViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) new ViewModelProvider.NewInstanceFactory()).get(ReceiptsViewModel.class);
         binding = FragmentRecipesBinding.inflate(inflater, container, false);
         root = binding.getRoot();
-
         recyclerView = (RecyclerView) binding.RclVListReceipts;
+        recyclerView.setOnTouchListener(this);
         updateRecyclerView();
         setupSeekBar();
 
@@ -87,5 +91,10 @@ public class ReceiptsFragment extends Fragment  implements ReceiptListAdapter.On
 //        Toast.makeText(getActivity().getApplicationContext(), "КЛИК", Toast.LENGTH_SHORT).show();
         RecipeDataMediator.setRecipe(recipeID);
         Navigation.findNavController(view).navigate(R.id.action_nav_slideshow_to_introduceRecipe);
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        return !(AppCircleNavigation.DrawerLayoutMotion.getState() == 0) || AppCircleNavigation.isDrawerOpen();
     }
 }

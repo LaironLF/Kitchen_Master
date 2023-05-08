@@ -11,32 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/MainLayout"
-            android:layout_width="600dp"
-            android:layout_height="800dp"
-            android:layout_marginTop="48dp"
-            android:background="@drawable/backrepeat"
-            android:orientation="vertical"
-            android:rotation="9"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.51"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:layout_editor_absoluteX="-100dp"
-            app:layout_editor_absoluteY="-100dp">
-
-        </LinearLayout>
-
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RclV_listReceipts"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="20dp" />
+            android:layout_height="match_parent"/>
 
         <SeekBar
             android:id="@+id/seekBar"
