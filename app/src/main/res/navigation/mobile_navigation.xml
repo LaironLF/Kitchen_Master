@@ -36,30 +36,30 @@
     <fragment
         android:id="@+id/nav_settings"
         android:name="com.laironlf.kitchen_master.ui.settings.SettingsFragment"
-        android:label="fragment_settings"
+        android:label="@string/nav_settings_string"
         tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/nav_favorite"
         android:name="com.laironlf.kitchen_master.ui.Favorite.FavoriteFragment"
-        android:label="fragment_favorite"
+        android:label="@string/nav_favorite_string"
         tools:layout="@layout/fragment_favorite" />
 
     <fragment
         android:id="@+id/nav_user"
         android:name="com.laironlf.kitchen_master.ui.User.UserFragment"
-        android:label="fragment_user"
+        android:label="@string/nav_user_string"
         tools:layout="@layout/fragment_user" />
 
 <!--    Остальные фрагменты   -->
     <fragment
         android:id="@+id/products"
         android:name="com.laironlf.kitchen_master.ui.productList.AddProductFragment"
-        android:label="Продукты"
+        android:label="@string/nav_add_products_string"
         tools:layout="@layout/fragment_addproducts" />
     <fragment
         android:id="@+id/introduceRecipe"
         android:name="com.laironlf.kitchen_master.ui.introduce_recipe.IntroduceRecipe"
-        android:label="fragment_introduce_recipe"
+        android:label="@string/nav_introduce_recipe_string"
         tools:layout="@layout/fragment_introduce_recipe" />
 </navigation>

@@ -17,4 +17,6 @@
     <string name="nav_user_string">Пользователь</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nav_introduce_recipe_string">Обзор рецепта</string>
+    <string name="nav_add_products_string">Добавление продуктов</string>
 </resources>

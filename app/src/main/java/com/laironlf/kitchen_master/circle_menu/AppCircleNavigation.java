@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,6 +44,9 @@ public class AppCircleNavigation {
     public static void createCircleMenu(DrawerLayout drawerLayout, AppCompatActivity activity, Menu menu, View toolbar){
         appCircleNavigation = new AppCircleNavigation(drawerLayout, activity, menu, toolbar);
     }
+    public static AppCircleNavigation getAppCircleNavigation(){
+        return appCircleNavigation;
+    }
     private AppCircleNavigation(DrawerLayout drawerLayout, AppCompatActivity activity, Menu menu, View toolbar){
         // Присваиваем нужды
         AppCircleNavigation.drawerLayout = drawerLayout;
@@ -51,23 +55,14 @@ public class AppCircleNavigation {
         // Инициализируем подклассы
         AppNavigation.initNavigation(activity, R.id.nav_host_fragment_content_main);
         RadioButtonGroup.initGroup(menu.size());
-        // Начинаем создавать меню
+        createMenuItems();
+
         DrawerLayoutGestures.initGestures(drawerLayout);
         DrawerLayoutMotion.initMotion(drawerLayout);
         NavCircleToolbar.initNavCircleToolbar(toolbar);
-//        toolbar.findViewById(R.id.btn_menu).setOnClickListener(view -> {
-//            if(isDrawerOpen())
-//                closeDrawer();
-//            else
-//                openDrawer();
-//        });
 
-        createMenuItems();
         Animation.initAnimations(RadioButtonGroup.getRadioButtonViews());
         Animation.setStartPosition();
-    }
-    public static AppCircleNavigation getAppCircleNavigation(){
-        return appCircleNavigation;
     }
 
     private static void createMenuItems() {
@@ -117,7 +112,7 @@ public class AppCircleNavigation {
             circleMenu.addView(radioButtonCenter);
             RadioButtonGroup.addRadioButton(radioButtonCenter);
         }
-        RadioButtonGroup.setCurrentRadioButton(AppNavigation.getCurrentDestination());
+        RadioButtonGroup.setCurrentRadioButton(AppNavigation.getCurrentDestinationID());
     }
 
     // --------------------------------------------------------
@@ -162,8 +157,7 @@ public class AppCircleNavigation {
         public static void setCurrentRadioButton (int idDestination){
             for(RadioButtonCenter btn : radioButtons)
                 if(btn.getId() == idDestination)
-                    currentRadioButton = btn;
-            currentRadioButton.setChecked(true);
+                    setCurrentRadioButton(btn);
         }
         public static void setCurrentRadioButton(RadioButtonCenter radioButtonCenter){
             if(currentRadioButton != null)
@@ -175,7 +169,7 @@ public class AppCircleNavigation {
         // Меняем радибаттон с анимациями и навигацией
         public static void changeRadioButton(RadioButtonCenter radioButtonCenter){
             setCurrentRadioButton(radioButtonCenter);
-            if(radioButtonCenter.getId() != AppNavigation.getCurrentDestination())
+            if(radioButtonCenter.getId() != AppNavigation.getCurrentDestinationID())
                 AppNavigation.navigate(radioButtonCenter.getId());
         }
 
@@ -200,12 +194,15 @@ public class AppCircleNavigation {
             return navController;
         }
 
-        public static int getCurrentDestination(){
+        public static int getCurrentDestinationID(){
             return Objects.requireNonNull(navController.getCurrentDestination()).getId();
+        }
+        public static NavDestination getCurrentDestination(){
+            return navController.getCurrentDestination();
         }
         public static boolean currentDestinationIsMenu(){
             for(int i = 0; i < menu.size(); i++)
-                if(menu.getItem(i).getItemId() == getCurrentDestination())
+                if(menu.getItem(i).getItemId() == getCurrentDestinationID())
                     return true;
             return false;
         }
@@ -391,8 +388,8 @@ public class AppCircleNavigation {
             OvershootInterpolator interpolator = new OvershootInterpolator(0.65f);
             for (int i = 0; i < buttonCenters.size(); i++){
                 ValueAnimator valueAnimator = createNewFloatAnimator(
-                        300,
-                        35L * (menu.size() - i -1),
+                        350,
+                        30L * (menu.size() - i -1),
                         interpolator,
                         -90f, reservedIconParams.get(i).circleAngle);
                 int finalI = i;
@@ -404,8 +401,8 @@ public class AppCircleNavigation {
                 });
                 enterIconAnimators.add(valueAnimator);
             }
-            // Задний круг
 
+            // Задний круг
             enterBackCircleAnimator = createNewIntAnimator(
                     350,
                     50,
@@ -467,9 +464,9 @@ public class AppCircleNavigation {
     public static class NavCircleToolbar implements NavController.OnDestinationChangedListener{
         private static NavCircleToolbar navCircleToolbar;
         private static Boolean previousIsMenu = true; // типо для оптимизации, хотя и выиграю я немного)
-        private static Boolean previousIsNotMenu;
         private static View toolbar;
         private static ImageButton btn_menu;
+        private static TextView txt_menu;
 
         public static void initNavCircleToolbar(View toolbar){
             navCircleToolbar = new NavCircleToolbar(toolbar);
@@ -477,6 +474,7 @@ public class AppCircleNavigation {
         private NavCircleToolbar(View toolbar){
             NavCircleToolbar.toolbar = toolbar;
             NavCircleToolbar.btn_menu = toolbar.findViewById(R.id.btn_menu);
+            NavCircleToolbar.txt_menu = toolbar.findViewById(R.id.txt_menu);
 
             AppNavigation.getNavController().addOnDestinationChangedListener(this);
             initMenuClick();
@@ -496,11 +494,12 @@ public class AppCircleNavigation {
         }
 
         private static void updateMenuIcon(){
-            if(AppNavigation.currentDestinationIsMenu() && !previousIsMenu){
+            boolean currentDestinationIsMenu = AppNavigation.currentDestinationIsMenu();
+            if(currentDestinationIsMenu && !previousIsMenu){
                 previousIsMenu = true;
                 btn_menu.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_menu, activity.getTheme()));
             }
-            if(!AppNavigation.currentDestinationIsMenu() && previousIsMenu){
+            if(!currentDestinationIsMenu && previousIsMenu){
                 previousIsMenu = false;
                 btn_menu.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_menu_back, activity.getTheme()));
             }
@@ -509,6 +508,7 @@ public class AppCircleNavigation {
         @Override
         public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
             updateMenuIcon();
+            txt_menu.setText(destination.getLabel());
         }
     }
 

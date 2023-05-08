@@ -52,6 +52,11 @@ public class MainActivity extends AppCompatActivity{
             return;
         }
         super.onBackPressed();
+        // Применим костыль
+        if(AppCircleNavigation.AppNavigation.getCurrentDestinationID() == R.id.nav_home)
+            AppCircleNavigation.RadioButtonGroup.setCurrentRadioButton(R.id.nav_home);
+        // Костыль работает !
+
     }
 
     @Override

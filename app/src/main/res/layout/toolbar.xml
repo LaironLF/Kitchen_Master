@@ -34,12 +34,14 @@
         app:layout_constraintStart_toEndOf="@+id/btn_menu"
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="center">
+
         <TextView
+            android:id="@+id/txt_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="example"
-            android:textSize="18sp"
-            android:textColor="@color/itemBlockColorDay"/>
+            android:textColor="@color/itemBlockColorDay"
+            android:textSize="18sp" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
