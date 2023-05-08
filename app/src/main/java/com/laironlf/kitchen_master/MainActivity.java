@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-//        boolean b = AppCircleNavigation.DrawerLayoutGestures.getGestures().onTouch(drawer, ev);
+        AppCircleNavigation.DrawerLayoutGestures.getGestures().onTouch(ev);
 //        Log.d(TAG, "dispatchTouchEvent: state " + b);
         return super.dispatchTouchEvent(ev);
     }

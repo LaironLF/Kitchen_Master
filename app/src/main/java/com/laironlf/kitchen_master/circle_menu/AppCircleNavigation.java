@@ -2,31 +2,32 @@ package com.laironlf.kitchen_master.circle_menu;
 
 import static android.content.ContentValues.TAG;
 
-import android.animation.Animator;
 import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 
-import com.google.android.material.appbar.AppBarLayout;
 import com.laironlf.kitchen_master.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Objects;
 
 public class AppCircleNavigation {
@@ -53,12 +54,13 @@ public class AppCircleNavigation {
         // Начинаем создавать меню
         DrawerLayoutGestures.initGestures(drawerLayout);
         DrawerLayoutMotion.initMotion(drawerLayout);
-        toolbar.findViewById(R.id.btn_menu).setOnClickListener(view -> {
-            if(isDrawerOpen())
-                closeDrawer();
-            else
-                openDrawer();
-        });
+        NavCircleToolbar.initNavCircleToolbar(toolbar);
+//        toolbar.findViewById(R.id.btn_menu).setOnClickListener(view -> {
+//            if(isDrawerOpen())
+//                closeDrawer();
+//            else
+//                openDrawer();
+//        });
 
         createMenuItems();
         Animation.initAnimations(RadioButtonGroup.getRadioButtonViews());
@@ -194,15 +196,25 @@ public class AppCircleNavigation {
         public static void initNavigation(Activity activity, int id){
             navController = Navigation.findNavController(activity, id);
         }
+        public static NavController getNavController(){
+            return navController;
+        }
 
         public static int getCurrentDestination(){
             return Objects.requireNonNull(navController.getCurrentDestination()).getId();
+        }
+        public static boolean currentDestinationIsMenu(){
+            for(int i = 0; i < menu.size(); i++)
+                if(menu.getItem(i).getItemId() == getCurrentDestination())
+                    return true;
+            return false;
         }
 
         public static void navigate(int idDestination){
             navController.popBackStack(navController.getGraph().getStartDestination(), false);
             navController.navigate(idDestination);
         }
+
 
     }
 
@@ -286,6 +298,9 @@ public class AppCircleNavigation {
                     break;
             }
             return false;
+        }
+        public void onTouch(MotionEvent event){
+            onTouch(drawerLayout, event);
         }
     }
 
@@ -376,8 +391,8 @@ public class AppCircleNavigation {
             OvershootInterpolator interpolator = new OvershootInterpolator(0.65f);
             for (int i = 0; i < buttonCenters.size(); i++){
                 ValueAnimator valueAnimator = createNewFloatAnimator(
-                        350,
-                        40L * (menu.size() - i -1),
+                        300,
+                        35L * (menu.size() - i -1),
                         interpolator,
                         -90f, reservedIconParams.get(i).circleAngle);
                 int finalI = i;
@@ -446,11 +461,55 @@ public class AppCircleNavigation {
 
     }
 
-     public static class NavCircleToolbar{
+    /**
+     * <p>Класс моего кастомного тулбара</p>
+     */
+    public static class NavCircleToolbar implements NavController.OnDestinationChangedListener{
+        private static NavCircleToolbar navCircleToolbar;
+        private static Boolean previousIsMenu = true; // типо для оптимизации, хотя и выиграю я немного)
+        private static Boolean previousIsNotMenu;
+        private static View toolbar;
+        private static ImageButton btn_menu;
 
-     }
+        public static void initNavCircleToolbar(View toolbar){
+            navCircleToolbar = new NavCircleToolbar(toolbar);
+        }
+        private NavCircleToolbar(View toolbar){
+            NavCircleToolbar.toolbar = toolbar;
+            NavCircleToolbar.btn_menu = toolbar.findViewById(R.id.btn_menu);
 
-    public static class drawerToggle{
+            AppNavigation.getNavController().addOnDestinationChangedListener(this);
+            initMenuClick();
+        }
 
+        private static void initMenuClick(){
+            btn_menu.setOnClickListener(view -> {
+                if(!AppNavigation.currentDestinationIsMenu()) {
+                    activity.onBackPressed();
+                    return;
+                }
+                if(isDrawerOpen())
+                    closeDrawer();
+                else
+                    openDrawer();
+            });
+        }
+
+        private static void updateMenuIcon(){
+            if(AppNavigation.currentDestinationIsMenu() && !previousIsMenu){
+                previousIsMenu = true;
+                btn_menu.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_menu, activity.getTheme()));
+            }
+            if(!AppNavigation.currentDestinationIsMenu() && previousIsMenu){
+                previousIsMenu = false;
+                btn_menu.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_menu_back, activity.getTheme()));
+            }
+        }
+
+        @Override
+        public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+            updateMenuIcon();
+        }
     }
+
 }
