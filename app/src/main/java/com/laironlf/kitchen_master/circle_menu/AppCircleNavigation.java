@@ -2,6 +2,8 @@ package com.laironlf.kitchen_master.circle_menu;
 
 import static android.content.ContentValues.TAG;
 
+import android.animation.Animator;
+import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -20,22 +22,27 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.laironlf.kitchen_master.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 
 public class AppCircleNavigation {
 
-    // Кароче юзаю единоличника, чтобы не создавалось 20 меню объектов
     private static AppCircleNavigation appCircleNavigation;
-    // Вариэблс для объекта
     private static DrawerLayout drawerLayout;
     private static AppCompatActivity activity;
     private static Menu menu;
-    // Остальное говно
-    private static ConstraintLayout circleMenu;
 
-    private AppCircleNavigation(DrawerLayout drawerLayout, AppCompatActivity activity, Menu menu){
+    // ---------------------------------------------------------
+
+    // Кароче чтобы не создавать объектов, можно просто статично создать меню и статично хранить
+    public static void createCircleMenu(DrawerLayout drawerLayout, AppCompatActivity activity, Menu menu, View toolbar){
+        appCircleNavigation = new AppCircleNavigation(drawerLayout, activity, menu, toolbar);
+    }
+    private AppCircleNavigation(DrawerLayout drawerLayout, AppCompatActivity activity, Menu menu, View toolbar){
         // Присваиваем нужды
         AppCircleNavigation.drawerLayout = drawerLayout;
         AppCircleNavigation.activity = activity;
@@ -46,23 +53,23 @@ public class AppCircleNavigation {
         // Начинаем создавать меню
         DrawerLayoutGestures.initGestures(drawerLayout);
         DrawerLayoutMotion.initMotion(drawerLayout);
+        toolbar.findViewById(R.id.btn_menu).setOnClickListener(view -> {
+            if(isDrawerOpen())
+                closeDrawer();
+            else
+                openDrawer();
+        });
 
-        circleMenu = drawerLayout.findViewById(R.id.circle_menu_main);
         createMenuItems();
         Animation.initAnimations(RadioButtonGroup.getRadioButtonViews());
         Animation.setStartPosition();
     }
-
-    // Кароче чтобы не создавать объектов, можно просто статично создать меню и статично хранить
-    public static void createCircleMenu(DrawerLayout drawerLayout, AppCompatActivity activity, Menu menu){
-        appCircleNavigation = new AppCircleNavigation(drawerLayout, activity, menu);
-    }
-
-    // Если надо будет, я могу отдать это меню
-    public static AppCircleNavigation getCircleMenu(){
+    public static AppCircleNavigation getAppCircleNavigation(){
         return appCircleNavigation;
     }
+
     private static void createMenuItems() {
+        ConstraintLayout circleMenu = drawerLayout.findViewById(R.id.circle_menu_main);
         // Достаём нужные величины из ресурсов
         int diameter = (int)activity.getResources().getDimension(R.dimen.circle_nav_item_diameter);
         int radius = (int)activity.getResources().getDimension(R.dimen.circle_nav_center_radius);
@@ -111,6 +118,7 @@ public class AppCircleNavigation {
         RadioButtonGroup.setCurrentRadioButton(AppNavigation.getCurrentDestination());
     }
 
+    // --------------------------------------------------------
     public static void openDrawer(){
         drawerLayout.openDrawer(GravityCompat.START);
     }
@@ -122,6 +130,8 @@ public class AppCircleNavigation {
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN, GravityCompat.START);
     }
     public static void unlockDrawer() { drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, GravityCompat.START);}
+
+    // ----------------------| Подклассы |----------------------------------
 
     /**
      * <p>Мой личный статичный класс радиогруппы, потому что view элемент мне не подходит</p>
@@ -136,34 +146,37 @@ public class AppCircleNavigation {
         public static void initGroup(int count){
             radioButtons = new ArrayList<>(count);
         }
+
+        // Добавляем кнопки в массив кнопок и прописываем логику онклик
+        public static void addRadioButton(RadioButtonCenter radioButtonCenter){
+            radioButtons.add(radioButtonCenter);
+            radioButtonCenter.setOnClickListener(view -> changeRadioButton(radioButtonCenter));
+        }
+
+        // Текущий радиобаттон
+        public static RadioButtonCenter getCurrentButton(){
+            return currentRadioButton;
+        }
         public static void setCurrentRadioButton (int idDestination){
             for(RadioButtonCenter btn : radioButtons)
                 if(btn.getId() == idDestination)
                     currentRadioButton = btn;
             currentRadioButton.setChecked(true);
         }
-
-        // Добавляем кнопки в массив кнопок
-        public static void addRadioButton(RadioButtonCenter radioButtonCenter){
-            radioButtons.add(radioButtonCenter);
-            //и сразу прописываем логику ЧЭКЭД
-            radioButtonCenter.setOnClickListener(view -> {
-                if(currentRadioButton != null)
-                    currentRadioButton.setChecked(false);
-
-                radioButtonCenter.setChecked(true);
-
-                if(radioButtonCenter != currentRadioButton){
-                    currentRadioButton = radioButtonCenter;
-                    AppNavigation.navigate(currentRadioButton.getId());
-                }
-            });
+        public static void setCurrentRadioButton(RadioButtonCenter radioButtonCenter){
+            if(currentRadioButton != null)
+                currentRadioButton.setChecked(false);
+            radioButtonCenter.setChecked(true);
+            currentRadioButton = radioButtonCenter;
         }
 
-        // получаем текущий РадиоБаттон
-        public static RadioButtonCenter getCurrentButton(){
-            return currentRadioButton;
+        // Меняем радибаттон с анимациями и навигацией
+        public static void changeRadioButton(RadioButtonCenter radioButtonCenter){
+            setCurrentRadioButton(radioButtonCenter);
+            if(radioButtonCenter.getId() != AppNavigation.getCurrentDestination())
+                AppNavigation.navigate(radioButtonCenter.getId());
         }
+
         public static ArrayList<RadioButtonCenter> getRadioButtonViews(){
             return radioButtons;
         }
@@ -183,11 +196,11 @@ public class AppCircleNavigation {
         }
 
         public static int getCurrentDestination(){
-            return navController.getCurrentDestination().getId();
+            return Objects.requireNonNull(navController.getCurrentDestination()).getId();
         }
 
         public static void navigate(int idDestination){
-            navController.popBackStack();
+            navController.popBackStack(navController.getGraph().getStartDestination(), false);
             navController.navigate(idDestination);
         }
 
@@ -280,9 +293,8 @@ public class AppCircleNavigation {
      * Класс с движением меню, отлавливаем движения меню и можем их обрабатывать
      */
     public static class DrawerLayoutMotion implements DrawerLayout.DrawerListener{
-        // Единоличник наверное избыточен
+
         private static DrawerLayoutMotion drawerLayoutMotion;
-        //Вариэбле
         public static int state = 0;
         private boolean beenStarted;
 
@@ -293,8 +305,6 @@ public class AppCircleNavigation {
         public static void initMotion(DrawerLayout drawerLayout){
             drawerLayoutMotion = new DrawerLayoutMotion(drawerLayout);
         }
-
-        // попрежнему можем отдать его
         public static DrawerLayoutMotion getDrawerLayoutMotion() {
             return drawerLayoutMotion;
 
@@ -311,31 +321,21 @@ public class AppCircleNavigation {
                 Animation.startEnterAnimators();
                 beenStarted = true;
             }
-
-            Log.d(TAG, "onDrawerSlide: " + slideOffset + " " + beenStarted);
-
-
             if(slideOffset == 1.0 && DrawerLayoutGestures.drawerLayoutGestures.mDragging)
                 lockDrawer();
         }
-
         @Override
         public void onDrawerOpened(@NonNull View drawerView) {
-//
-        }
 
+        }
         @Override
         public void onDrawerClosed(@NonNull View drawerView) {
             Animation.setStartPosition();
             beenStarted = false;
-//            Log.d(TAG, "onDrawerClosed: close)");w
-//            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         }
-
         @Override
         public void onDrawerStateChanged(int newState) {
             state = newState;
-            Log.d(TAG, "onDrawerStateChanged: " + newState);
         }
     }
 
@@ -347,33 +347,12 @@ public class AppCircleNavigation {
         private static ArrayList<ConstraintLayout.LayoutParams> reservedIconParams;
         private static ArrayList<RadioButtonCenter> buttonCenters;
         private static ArrayList<ValueAnimator> enterIconAnimators;
-        private static ValueAnimator enterBackCircleAnimator;
+
         private static ConstraintLayout.LayoutParams reservedBackCircleParams;
         private static ConstraintLayout navBack;
+        private static ValueAnimator enterBackCircleAnimator;
 
-        public static void startEnterAnimators(){
-            for (ValueAnimator enterAnimator: enterIconAnimators)
-                enterAnimator.start();
-            enterBackCircleAnimator.start();
-        }
-
-        public static void setStartPosition(){
-            //Отменяем анимации, если они были
-            enterBackCircleAnimator.cancel();
-            for(ValueAnimator animator: enterIconAnimators)
-                animator.cancel();
-
-            //выставляем стартовые позицыии
-            for (RadioButtonCenter buttonCenter: buttonCenters){
-                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) buttonCenter.getLayoutParams();
-                params.circleAngle = -90f;
-                buttonCenter.setLayoutParams(params);
-            }
-            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) navBack.getLayoutParams();
-            params.topMargin = 0;
-            navBack.setLayoutParams(params);
-        }
-
+        // Общая иницализация анимаций
         public static void initAnimations(ArrayList<RadioButtonCenter> buttonCenters){
             Animation.buttonCenters = buttonCenters;
 
@@ -392,12 +371,15 @@ public class AppCircleNavigation {
             initEnterAnimators();
         }
 
+        // инициализация анимации открывания меню
         private static void initEnterAnimators(){
+            OvershootInterpolator interpolator = new OvershootInterpolator(0.65f);
             for (int i = 0; i < buttonCenters.size(); i++){
-                ValueAnimator valueAnimator = ValueAnimator.ofFloat(-90f, reservedIconParams.get(i).circleAngle);
-                valueAnimator.setDuration(500);
-                valueAnimator.setStartDelay((buttonCenters.size() -1 - i)* 50L);
-                valueAnimator.setInterpolator(new OvershootInterpolator(0.65f));
+                ValueAnimator valueAnimator = createNewFloatAnimator(
+                        350,
+                        40L * (menu.size() - i -1),
+                        interpolator,
+                        -90f, reservedIconParams.get(i).circleAngle);
                 int finalI = i;
                 valueAnimator.addUpdateListener(animator -> {
                     float value = (float) animator.getAnimatedValue();
@@ -409,9 +391,12 @@ public class AppCircleNavigation {
             }
             // Задний круг
 
-            enterBackCircleAnimator = ValueAnimator.ofInt(0, reservedBackCircleParams.topMargin);
-            enterBackCircleAnimator.setDuration(350);
-            enterBackCircleAnimator.setInterpolator(new DecelerateInterpolator());
+            enterBackCircleAnimator = createNewIntAnimator(
+                    350,
+                    50,
+                    new DecelerateInterpolator(),
+                    0, reservedBackCircleParams.topMargin
+            );
             enterBackCircleAnimator.addUpdateListener(animator -> {
                 int value = (int) animator.getAnimatedValue();
                 ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) navBack.getLayoutParams();
@@ -420,8 +405,52 @@ public class AppCircleNavigation {
             });
 
         }
+        public static void startEnterAnimators(){
+            for (ValueAnimator enterAnimator: enterIconAnimators)
+                enterAnimator.start();
+            enterBackCircleAnimator.start();
+        }
+
+        public static void setStartPosition(){
+            //Отменяем анимации, если они были
+            enterBackCircleAnimator.cancel();
+            for(ValueAnimator animator: enterIconAnimators)
+                animator.cancel();
+
+            //выставляем стартовые позиции
+            for (RadioButtonCenter buttonCenter: buttonCenters){
+                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) buttonCenter.getLayoutParams();
+                params.circleAngle = -90f;
+                buttonCenter.setLayoutParams(params);
+            }
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) navBack.getLayoutParams();
+            params.topMargin = 0;
+            navBack.setLayoutParams(params);
+        }
+
+        // Выносим создание аниматоров для удобства
+        public static ValueAnimator createNewFloatAnimator(long duration, long startDelay, TimeInterpolator interpolator, float... values){
+            ValueAnimator valueAnimator = ValueAnimator.ofFloat(values);
+            return setBaseParameters(valueAnimator, duration, startDelay, interpolator);
+        }
+        public static ValueAnimator createNewIntAnimator(long duration, long startDelay, TimeInterpolator interpolator, int... values){
+            ValueAnimator valueAnimator = ValueAnimator.ofInt(values);
+            return setBaseParameters(valueAnimator, duration, startDelay, interpolator);
+        }
+        private static ValueAnimator setBaseParameters(ValueAnimator valueAnimator, long duration, long startDelay, TimeInterpolator interpolator){
+            valueAnimator.setDuration(duration);
+            valueAnimator.setStartDelay(startDelay);
+            valueAnimator.setInterpolator(interpolator);
+            return valueAnimator;
+        }
 
     }
 
-//    public static class drawerToggle
+     public static class NavCircleToolbar{
+
+     }
+
+    public static class drawerToggle{
+
+    }
 }

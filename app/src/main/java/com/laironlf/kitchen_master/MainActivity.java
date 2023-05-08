@@ -32,43 +32,25 @@ import com.laironlf.kitchen_master.databinding.ActivityMainNavBinding;
 
 public class MainActivity extends AppCompatActivity{
 
-    private AppBarConfiguration mAppBarConfiguration;
-    private ActivityMainNavBinding binding;
-    private DrawerLayout drawer;
-//    private RelativeLayout menu;
-    private NavController navController;
-    private AppCircleNavigation appCircleNavigation;
-    private AppBarLayout btn_menu;
-
-    private static final int SWIPE_THRESHOLD = 100;
-    private float initialX;
-    private boolean isDrawerOpen;
-
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainNavBinding.inflate(getLayoutInflater());
+        ActivityMainNavBinding binding = ActivityMainNavBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         Menu menu = new PopupMenu(this, null).getMenu();
         getMenuInflater().inflate(R.menu.activity_main_nav_drawer, menu);
 
-        for(int i = 0; i < menu.size(); i++)
-            Log.d("Menu:", String.valueOf(menu.getItem(i).getTitle()));
-
-        drawer = binding.drawerLayout;
-        AppCircleNavigation.createCircleMenu(drawer, this, menu);
-//        btn_menu.setOnClickListener(view -> appCircleNavigation.openDrawer(GravityCompat.START));
+        // Создаём менюшку получается
+        AppCircleNavigation.createCircleMenu(binding.drawerLayout, this, menu, binding.toolbar.getRoot());
     }
 
     @Override
     public void onBackPressed() {
-        if(drawer.isDrawerOpen(GravityCompat.START)){
+        if(AppCircleNavigation.isDrawerOpen()){
             AppCircleNavigation.closeDrawer();
             return;
         }
-        Toast.makeText(this, "BACK", Toast.LENGTH_SHORT).show();
         super.onBackPressed();
     }
 
@@ -81,7 +63,7 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        boolean b = AppCircleNavigation.DrawerLayoutGestures.getGestures().onTouch(drawer, ev);
+//        boolean b = AppCircleNavigation.DrawerLayoutGestures.getGestures().onTouch(drawer, ev);
 //        Log.d(TAG, "dispatchTouchEvent: state " + b);
         return super.dispatchTouchEvent(ev);
     }
