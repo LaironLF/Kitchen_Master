@@ -24,7 +24,7 @@ import com.laironlf.kitchen_master.databinding.FragmentRecipesBinding;
 
 import java.util.ArrayList;
 
-public class ReceiptsFragment extends Fragment implements ReceiptListAdapter.OnRecipeClickListener, View.OnTouchListener {
+public class ReceiptsFragment extends Fragment implements ReceiptListAdapter.OnRecipeClickListener{
 
     private FragmentRecipesBinding binding;
     private RecyclerView recyclerView;
@@ -40,7 +40,6 @@ public class ReceiptsFragment extends Fragment implements ReceiptListAdapter.OnR
         binding = FragmentRecipesBinding.inflate(inflater, container, false);
         root = binding.getRoot();
         recyclerView = (RecyclerView) binding.RclVListReceipts;
-        recyclerView.setOnTouchListener(this);
         updateRecyclerView();
         setupSeekBar();
 
@@ -93,8 +92,4 @@ public class ReceiptsFragment extends Fragment implements ReceiptListAdapter.OnR
         Navigation.findNavController(view).navigate(R.id.action_nav_slideshow_to_introduceRecipe);
     }
 
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        return !(AppCircleNavigation.DrawerLayoutMotion.getState() == 0) || AppCircleNavigation.isDrawerOpen();
-    }
 }

@@ -7,10 +7,12 @@ import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.BounceInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageButton;
@@ -154,6 +156,12 @@ public class AppCircleNavigation {
         public static RadioButtonCenter getCurrentButton(){
             return currentRadioButton;
         }
+        public static int getRadioButtonIndex(RadioButtonCenter radioButtonCenter){
+            for(int i = 0; i<radioButtons.size(); i++)
+                if(radioButtons.get(i) == radioButtonCenter)
+                    return i;
+            return -1;
+        }
         public static void setCurrentRadioButton (int idDestination){
             for(RadioButtonCenter btn : radioButtons)
                 if(btn.getId() == idDestination)
@@ -169,8 +177,18 @@ public class AppCircleNavigation {
         // Меняем радибаттон с анимациями и навигацией
         public static void changeRadioButton(RadioButtonCenter radioButtonCenter){
             setCurrentRadioButton(radioButtonCenter);
+            Animation.startBulbAnimator(getRadioButtonIndex(radioButtonCenter));
             if(radioButtonCenter.getId() != AppNavigation.getCurrentDestinationID())
                 AppNavigation.navigate(radioButtonCenter.getId());
+        }
+        public static void swipeRadioButton(boolean nextButton){
+            int thisButtonId = getRadioButtonIndex(currentRadioButton);
+            if(thisButtonId == -1) return;
+            if(nextButton)
+                if(++thisButtonId > menu.size()-1) thisButtonId = 0;
+            if(!nextButton)
+                if(--thisButtonId < 0) thisButtonId = menu.size() -1;
+            changeRadioButton(radioButtons.get(thisButtonId));
         }
 
         public static ArrayList<RadioButtonCenter> getRadioButtonViews(){
@@ -222,10 +240,20 @@ public class AppCircleNavigation {
     public static class DrawerLayoutGestures implements View.OnTouchListener {
         // variables
         private static DrawerLayoutGestures drawerLayoutGestures;
+
+        private int windowWidth;
+        private float circleCenterX;
+        private float circleCenterY;
+        private float circleRadius;
         private float initialX;
         private float initialY;
-        private static final float xValueToReact = 20;
+        private float deltaX;
+        private float deltaY;
         private boolean mDragging;
+
+        private static final float windowPercent = 0.12F;
+        private static final float xValueToReact = 20;
+        private static final float yValueToReact = 20;
         private static final float axisYFactor = 0.3F;
         private static final float axisXFactor = 0.5F;
 
@@ -233,6 +261,18 @@ public class AppCircleNavigation {
         private DrawerLayoutGestures(DrawerLayout drawerLayout){
             drawerLayout.setOnTouchListener(this);
             drawerLayout.findViewById(R.id.nav_view).setOnTouchListener(this);
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            windowWidth = displayMetrics.widthPixels;
+
+            float circleDiameter = activity.getResources().getDimension(R.dimen.circle_menu_diameter);
+            float circleMarginTop = activity.getResources().getDimension(R.dimen.stndTopMargin);
+            float circleMarginLeft = activity.getResources().getDimension(R.dimen.circle_menu_leftMargin);
+
+            circleRadius = circleDiameter/2;
+            circleCenterX = (circleRadius + circleMarginLeft);
+            circleCenterY = (circleRadius + circleMarginTop);
+
         }
         public static void initGestures(DrawerLayout drawerLayout){
             drawerLayoutGestures = new DrawerLayoutGestures(drawerLayout);
@@ -249,16 +289,21 @@ public class AppCircleNavigation {
                 case MotionEvent.ACTION_DOWN:
                     initialX = motionEvent.getRawX();
                     initialY = motionEvent.getRawY();
-//                    if(isDrawerOpen()){
-//                        drawerLayout
-//                    }
-//                    drawerLayout.findViewById(R.id.nav_view).setTranslationY(initialY);
-                    mDragging = true;
-                    return true;
+                    deltaX = 0;
+                    deltaY = 0;
+
+                    if (initialX < windowWidth * windowPercent)
+                        mDragging = true;
+                    if(isDrawerOpen()){
+                        mDragging = true;
+                        return true;
+                    }
+
+                    break;
 
                 case MotionEvent.ACTION_MOVE:
-                    float deltaX = motionEvent.getRawX() - initialX;
-                    float deltaY = motionEvent.getRawY() - initialY;
+                    deltaX = motionEvent.getRawX() - initialX;
+                    deltaY = motionEvent.getRawY() - initialY;
 
                     // Обработка движений влево-вправо
                     if(mDragging && Math.abs(deltaX * axisYFactor) > Math.abs(deltaY)){
@@ -266,6 +311,7 @@ public class AppCircleNavigation {
                         if(!isDrawerOpen() && deltaX > xValueToReact){
                             openDrawer();
                             mDragging = false;
+                            return true;
                         }
                         // влево
                         if(isDrawerOpen() && -deltaX > xValueToReact){
@@ -276,19 +322,26 @@ public class AppCircleNavigation {
                     // Обработка движений вверх вниз, при открытой менюшке
                     if(mDragging && isDrawerOpen() && Math.abs(deltaX) < Math.abs(deltaY * axisXFactor)){
                         // вверх
-                        if(deltaY > xValueToReact){
+                        if(deltaY > yValueToReact){
+                            RadioButtonGroup.swipeRadioButton(true);
                             mDragging = false;
                         }
                         // вниз
-                        if(-deltaY > xValueToReact){
+                        if(-deltaY > yValueToReact){
+                            RadioButtonGroup.swipeRadioButton(false);
                             mDragging = false;
                         }
                     }
-//                    Log.d(TAG, "onTouch: dx, dy" +deltaX +" " +deltaY + " " +mDragging);
+                    Log.d(TAG, "onTouch: dx, dy" +deltaX +" " +deltaY + " " +mDragging);
                     break;
 
                 case MotionEvent.ACTION_UP:
-                    mDragging = true;
+                    if(deltaY < yValueToReact && deltaX < xValueToReact && mDragging) {
+                        float distanceFromCenter = (float) Math.sqrt(Math.pow(initialX + deltaX - circleCenterX, 2) + Math.pow(initialY + deltaY - circleCenterY, 2));
+                        if(distanceFromCenter > circleRadius)
+                            closeDrawer();
+                    }
+                    mDragging = false;
                     break;
                 case MotionEvent.ACTION_CANCEL:
 
@@ -296,8 +349,8 @@ public class AppCircleNavigation {
             }
             return false;
         }
-        public void onTouch(MotionEvent event){
-            onTouch(drawerLayout, event);
+        public boolean onTouch(MotionEvent event){
+            return onTouch(drawerLayout, event);
         }
     }
 
@@ -333,7 +386,7 @@ public class AppCircleNavigation {
                 Animation.startEnterAnimators();
                 beenStarted = true;
             }
-            if(slideOffset == 1.0 && DrawerLayoutGestures.drawerLayoutGestures.mDragging)
+            if(slideOffset == 1.0)
                 lockDrawer();
         }
         @Override
@@ -359,10 +412,12 @@ public class AppCircleNavigation {
         private static ArrayList<ConstraintLayout.LayoutParams> reservedIconParams;
         private static ArrayList<RadioButtonCenter> buttonCenters;
         private static ArrayList<ValueAnimator> enterIconAnimators;
+        private static ArrayList<ValueAnimator> bulbAnimators;
 
         private static ConstraintLayout.LayoutParams reservedBackCircleParams;
         private static ConstraintLayout navBack;
         private static ValueAnimator enterBackCircleAnimator;
+
 
         // Общая иницализация анимаций
         public static void initAnimations(ArrayList<RadioButtonCenter> buttonCenters){
@@ -370,9 +425,10 @@ public class AppCircleNavigation {
 
             Log.d(TAG, "initIconAnimations: " + buttonCenters.size());
 
-            // инициализация параметров для иконок
+            // инициализация массивов
             reservedIconParams = new ArrayList<>(buttonCenters.size());
             enterIconAnimators = new ArrayList<>(buttonCenters.size());
+            bulbAnimators = new ArrayList<>(buttonCenters.size());
 
             for (RadioButtonCenter btn: buttonCenters)
                 reservedIconParams.add((ConstraintLayout.LayoutParams) btn.getLayoutParams());
@@ -381,6 +437,7 @@ public class AppCircleNavigation {
             reservedBackCircleParams = (ConstraintLayout.LayoutParams) navBack.getLayoutParams();
 
             initEnterAnimators();
+            initBulbAnimators();
         }
 
         // инициализация анимации открывания меню
@@ -421,6 +478,30 @@ public class AppCircleNavigation {
             for (ValueAnimator enterAnimator: enterIconAnimators)
                 enterAnimator.start();
             enterBackCircleAnimator.start();
+        }
+
+        // инициализация анимации прыжка кнопки
+        private static void initBulbAnimators(){
+            for (int i = 0; i < buttonCenters.size(); i++){
+                ValueAnimator valueAnimator = createNewFloatAnimator(
+                        200,
+                        0,
+                        new BounceInterpolator(),
+                        1, 0.9F, 1.1F, 1
+                );
+                int finalI = i;
+                valueAnimator.addUpdateListener(animator -> {
+                    float value = (float) animator.getAnimatedValue();
+                    buttonCenters.get(finalI).setScaleX(value);
+                    buttonCenters.get(finalI).setScaleY(value);
+                });
+                bulbAnimators.add(valueAnimator);
+            }
+        }
+        private static void startBulbAnimator(int index){
+            //если был запущен, то отменяем
+            bulbAnimators.get(index).cancel();
+            bulbAnimators.get(index).start();
         }
 
         public static void setStartPosition(){

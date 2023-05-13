@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity{
         if(AppCircleNavigation.AppNavigation.getCurrentDestinationID() == R.id.nav_home)
             AppCircleNavigation.RadioButtonGroup.setCurrentRadioButton(R.id.nav_home);
         // Костыль работает !
-
     }
 
     @Override
@@ -75,7 +74,6 @@ public class MainActivity extends AppCompatActivity{
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         AppCircleNavigation.DrawerLayoutGestures.getGestures().onTouch(ev);
-//        Log.d(TAG, "dispatchTouchEvent: state " + b);
         return super.dispatchTouchEvent(ev);
     }
 }
