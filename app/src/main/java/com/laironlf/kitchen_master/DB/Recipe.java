@@ -1,6 +1,7 @@
 package com.laironlf.kitchen_master.DB;
 
 import java.sql.Time;
+import java.util.Objects;
 
 public class Recipe {
     public int recipeID;
@@ -19,6 +20,12 @@ public class Recipe {
         this.typeName = typeName;
         this.time = time;
         this.imageMainURL = imageMainURL;
+    }
+
+    public String getTimeString(){
+        String[] timeString = time.toString().split(":");
+        int minuteCount = Integer.parseInt(timeString[1]) + Integer.parseInt(timeString[0]) * 60;
+        return minuteCount + " мин";
     }
 
     public void pr(){

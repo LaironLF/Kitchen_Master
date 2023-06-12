@@ -22,7 +22,6 @@ public class  ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter
     private List<Recipe> recipes;
     private Context context;
     private OnRecipeClickListener onRecipeClickListener;
-    private View viewDevider;
 
     public ReceiptListAdapter(Context context, List<Recipe> recipes, OnRecipeClickListener onRecipeClickListener){
         this.recipes = recipes;
@@ -43,8 +42,9 @@ public class  ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter
         Recipe receipt = recipes.get(i);
         viewHolder.ReceiptTitle.setText(receipt.recipeName);
         viewHolder.ReceiptType.setText(receipt.typeName);
+        viewHolder.ReceiptTime.setText(receipt.getTimeString());
         if(i == getItemCount()-1)
-            viewDevider.setVisibility(View.INVISIBLE);
+            viewHolder.viewDevider.setVisibility(View.INVISIBLE);
 
         Glide
                 .with(context)
@@ -60,6 +60,8 @@ public class  ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        TextView ReceiptTime;
+        View viewDevider;
         TextView ReceiptTitle, ReceiptType;
         ImageView RecipeImage;
         OnRecipeClickListener onRecipeClickListener;
@@ -67,10 +69,12 @@ public class  ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter
         public ViewHolder(@NonNull View itemView, OnRecipeClickListener onRecipeClickListener) {
             super(itemView);
             this.onRecipeClickListener = onRecipeClickListener;
-            ReceiptTitle = (TextView) itemView.findViewById(R.id.tv_receiptTitle);
-            ReceiptType = (TextView) itemView.findViewById(R.id.tv_receiptType);
-            RecipeImage = (ImageView) itemView.findViewById(R.id.imageReceipt);
+            ReceiptTitle = itemView.findViewById(R.id.tv_receiptTitle);
+            ReceiptType = itemView.findViewById(R.id.tv_receiptType);
+            RecipeImage = itemView.findViewById(R.id.imageReceipt);
+            ReceiptTime = itemView.findViewById(R.id.tv_receiptTime);
             viewDevider = itemView.findViewById(R.id.last_item_divider);
+
 
 
         }
