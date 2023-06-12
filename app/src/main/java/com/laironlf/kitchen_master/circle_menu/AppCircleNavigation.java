@@ -61,7 +61,7 @@ public class AppCircleNavigation {
 
         DrawerLayoutGestures.initGestures(drawerLayout);
         DrawerLayoutMotion.initMotion(drawerLayout);
-        NavCircleToolbar.initNavCircleToolbar(toolbar);
+        KMToolbar.initNavCircleToolbar(toolbar, activity);
 
         Animation.initAnimations(RadioButtonGroup.getRadioButtonViews());
         Animation.setStartPosition();
@@ -539,58 +539,6 @@ public class AppCircleNavigation {
 
     }
 
-    /**
-     * <p>Класс моего кастомного тулбара</p>
-     */
-    public static class NavCircleToolbar implements NavController.OnDestinationChangedListener{
-        private static NavCircleToolbar navCircleToolbar;
-        private static Boolean previousIsMenu = true; // типо для оптимизации, хотя и выиграю я немного)
-        private static View toolbar;
-        private static ImageButton btn_menu;
-        private static TextView txt_menu;
 
-        public static void initNavCircleToolbar(View toolbar){
-            navCircleToolbar = new NavCircleToolbar(toolbar);
-        }
-        private NavCircleToolbar(View toolbar){
-            NavCircleToolbar.toolbar = toolbar;
-            NavCircleToolbar.btn_menu = toolbar.findViewById(R.id.btn_menu);
-            NavCircleToolbar.txt_menu = toolbar.findViewById(R.id.txt_menu);
-
-            AppNavigation.getNavController().addOnDestinationChangedListener(this);
-            initMenuClick();
-        }
-
-        private static void initMenuClick(){
-            btn_menu.setOnClickListener(view -> {
-                if(!AppNavigation.currentDestinationIsMenu()) {
-                    activity.onBackPressed();
-                    return;
-                }
-                if(isDrawerOpen())
-                    closeDrawer();
-                else
-                    openDrawer();
-            });
-        }
-
-        private static void updateMenuIcon(){
-            boolean currentDestinationIsMenu = AppNavigation.currentDestinationIsMenu();
-            if(currentDestinationIsMenu && !previousIsMenu){
-                previousIsMenu = true;
-                btn_menu.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_menu, activity.getTheme()));
-            }
-            if(!currentDestinationIsMenu && previousIsMenu){
-                previousIsMenu = false;
-                btn_menu.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_menu_back, activity.getTheme()));
-            }
-        }
-
-        @Override
-        public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-            updateMenuIcon();
-            txt_menu.setText(destination.getLabel());
-        }
-    }
 
 }

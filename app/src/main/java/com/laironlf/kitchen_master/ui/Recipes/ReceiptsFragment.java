@@ -33,7 +33,7 @@ public class ReceiptsFragment extends Fragment implements ReceiptListAdapter.OnR
     private ArrayList<Recipe> recipes;
     private int count;
 
-
+/**/
     @SuppressLint("ClickableViewAccessibility")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         receiptsViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) new ViewModelProvider.NewInstanceFactory()).get(ReceiptsViewModel.class);

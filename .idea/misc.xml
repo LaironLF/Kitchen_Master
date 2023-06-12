@@ -14,7 +14,13 @@
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/circle_nav_square_selector.xml" value="0.2825" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/circle_nav_text_selector.xml" value="0.2825" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/circle_shape.xml" value="0.276" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/delete_btn.xml" value="0.284" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/easy_cook.xml" value="0.284" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/fridge.xml" value="0.284" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/hard_cook.xml" value="0.284" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/hare.xml" value="0.284" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/ic_favorite.xml" value="0.277" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/ic_fridge.xml" value="0.3375" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/ic_home.xml" value="0.277" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2635" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2635" />
@@ -27,15 +33,26 @@
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/ic_user.xml" value="0.2885" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/ic_weather.xml" value="0.2885" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/image_shape.xml" value="0.257" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/long_time.xml" value="0.284" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/medium_cook.xml" value="0.284" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/menu_sel_transition.xml" value="0.2885" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/menu_shape.xml" value="0.208" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/menu_square_shape.xml" value="0.2885" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/menu_vector.xml" value="0.2885" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/product_item_back.xml" value="0.284" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/recipe_item_shape.xml" value="0.284" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/recipe_item_statsback.xml" value="0.3375" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/seekbar_progress.xml" value="0.284" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/seekbar_thumb.xml" value="0.284" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/short_time.xml" value="0.284" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/side_nav_bar.xml" value="0.343" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/stl_list_item_back.xml" value="0.274" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/tab_global_back.xml" value="0.3375" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/tag_shape.xml" value="0.3375" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/toolbar_form_left.xml" value="0.2825" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/toolbar_form_right.xml" value="0.2825" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/toolbarform.xml" value="0.209" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/toolbarform_left.xml" value="0.284" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/drawable/toolbarform_right.xml" value="0.2825" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout-v28/list_item.xml" value="0.3078125" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/activity_main.xml" value="0.38697916666666665" />
@@ -46,6 +63,7 @@
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/circlemenu_drawer_v_1_2.xml" value="0.33" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/content_main.xml" value="0.19" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/fragment_addproducts.xml" value="0.3439814814814815" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/fragment_all_recipes.xml" value="0.3175213675213675" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/fragment_blank.xml" value="0.2989583333333333" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/fragment_favorite.xml" value="0.15854700854700854" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/fragment_fridge.xml" value="0.3439814814814815" />
@@ -56,11 +74,12 @@
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/fragment_settings.xml" value="0.19322916666666667" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/fragment_slideshow.xml" value="0.30885416666666665" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/fragment_user.xml" value="0.19322916666666667" />
-        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/ingridient_item.xml" value="0.33" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/ingridient_item.xml" value="0.381294964028777" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/list_item.xml" value="0.33" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/nav_header_main.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/product_item.xml" value="0.5" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/product_item_delete.xml" value="0.22685185185185186" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/recipe_item.xml" value="0.9" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/layout/toolbar.xml" value="0.33" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/menu/activity_main_nav_drawer.xml" value="0.33" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Depricated/Kitchen_Master/app/src/main/res/menu/main.xml" value="0.5" />

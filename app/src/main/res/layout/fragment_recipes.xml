@@ -11,24 +11,48 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="18dp"
+            android:orientation="horizontal"
+            android:background="@drawable/tab_global_back"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="18dp">
+
+            <com.google.android.material.tabs.TabItem
+                android:text="Все рецепты"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toolbarform_left"
+                android:layout_weight="1" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toolbarform_left"
+                android:layout_weight="1"/>
+        </com.google.android.material.tabs.TabLayout>
+
 
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="8dp"
             android:id="@+id/RclV_listReceipts"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
         <SeekBar
             android:id="@+id/seekBar"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
             android:max="10"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
             android:progress="0"
             android:progressDrawable="@drawable/seekbar_progress"
             android:thumb="@drawable/seekbar_thumb"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

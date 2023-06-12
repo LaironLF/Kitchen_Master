@@ -33,7 +33,7 @@ public class  ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = inflater.inflate(R.layout.list_item, viewGroup, false);
+        View view = inflater.inflate(R.layout.recipe_item, viewGroup, false);
         return new ViewHolder(view, onRecipeClickListener);
     }
 
