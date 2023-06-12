@@ -21,7 +21,8 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="18dp"
             app:tabTextAppearance="@style/TabLayoutTextAppearance"
-            app:tabIndicatorColor="?attr/navUIElementColor">
+            app:tabIndicatorColor="?attr/navUIElementColor"
+            app:tabRippleColor="@null">
 
             <com.google.android.material.tabs.TabItem
                 android:text="@string/tab_title_recipes_all"
