@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.tabs.TabLayout;
 import com.laironlf.kitchen_master.DB.Recipe;
 import com.laironlf.kitchen_master.R;
 import com.laironlf.kitchen_master.circle_menu.AppCircleNavigation;
@@ -30,50 +31,60 @@ public class ReceiptsFragment extends Fragment implements ReceiptListAdapter.OnR
     private RecyclerView recyclerView;
     private ReceiptsViewModel receiptsViewModel;
     private View root;
-    private ArrayList<Recipe> recipes;
-    private int count;
+    private ReceiptListAdapter receiptListAdapter;
 
-/**/
+    /**/
     @SuppressLint("ClickableViewAccessibility")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         receiptsViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) new ViewModelProvider.NewInstanceFactory()).get(ReceiptsViewModel.class);
         binding = FragmentRecipesBinding.inflate(inflater, container, false);
         root = binding.getRoot();
-        recyclerView = (RecyclerView) binding.RclVListReceipts;
+        recyclerView = binding.RclVListReceipts;
         updateRecyclerView();
-        setupSeekBar();
+        setupTabLayout();
+        updateData(10);
+
 
         return root;
     }
 
-    private void setupSeekBar() {
-        SeekBar seekBar = root.findViewById(R.id.seekBar);
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                count = progress;
-                // Здесь вы можете обновить данные на основе нового значения count
-//                Toast.makeText(getActivity().getApplicationContext(), String.valueOf(progress), Toast.LENGTH_SHORT).show();
-                receiptsViewModel.updateRecipes(count);
-                updateRecyclerView();
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-//                Toast.makeText(getActivity().getApplicationContext(), "Клик", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
-    }
     public void updateRecyclerView(){
         receiptsViewModel.getRecipes().observe(getViewLifecycleOwner(), recipes -> {
-            this.recipes = recipes;
-            ReceiptListAdapter receiptListAdapter = new ReceiptListAdapter(root.getContext(), recipes, this);
+            receiptListAdapter = new ReceiptListAdapter(root.getContext(), recipes, this);
             recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
             recyclerView.setAdapter(receiptListAdapter);
+        });
+    }
+
+    private void updateData(int param){
+        receiptsViewModel.updateRecipes(param);
+        updateRecyclerView();
+    }
+
+    private void setupTabLayout(){
+        TabLayout tabLayout = binding.TabLayout;
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+                    case 0:
+                        updateData(10);
+                        break;
+                    case 1:
+                        updateData(0);
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
         });
     }
 
@@ -82,7 +93,6 @@ public class ReceiptsFragment extends Fragment implements ReceiptListAdapter.OnR
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
     }
 
     @Override

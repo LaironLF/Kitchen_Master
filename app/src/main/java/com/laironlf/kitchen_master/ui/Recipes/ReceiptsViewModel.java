@@ -16,6 +16,7 @@ public class ReceiptsViewModel extends ViewModel {
     private MutableLiveData<ArrayList<Recipe>> recipes;
 
     public ReceiptsViewModel() {
+        recipes = new MutableLiveData<>();
         updateRecipes(0);
     }
 
@@ -35,7 +36,6 @@ public class ReceiptsViewModel extends ViewModel {
         }
         DB.getRecipe = new DB.GetRecipe();
 
-        recipes = new MutableLiveData<>();
         recipes.setValue(DB.recipes);
     }
 

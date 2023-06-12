@@ -22,6 +22,7 @@ public class  ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter
     private List<Recipe> recipes;
     private Context context;
     private OnRecipeClickListener onRecipeClickListener;
+    private View viewDevider;
 
     public ReceiptListAdapter(Context context, List<Recipe> recipes, OnRecipeClickListener onRecipeClickListener){
         this.recipes = recipes;
@@ -42,10 +43,8 @@ public class  ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter
         Recipe receipt = recipes.get(i);
         viewHolder.ReceiptTitle.setText(receipt.recipeName);
         viewHolder.ReceiptType.setText(receipt.typeName);
-
-//        RequestManager requestManager = Glide.with(context);
-//        RequestBuilder requestBuilder = requestManager.load("http://developer.alexanderklimov.ru/android/images/android_cat.jpg");
-//        requestBuilder.into(viewHolder.RecipeImage);
+        if(i == getItemCount()-1)
+            viewDevider.setVisibility(View.INVISIBLE);
 
         Glide
                 .with(context)
@@ -71,7 +70,9 @@ public class  ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter
             ReceiptTitle = (TextView) itemView.findViewById(R.id.tv_receiptTitle);
             ReceiptType = (TextView) itemView.findViewById(R.id.tv_receiptType);
             RecipeImage = (ImageView) itemView.findViewById(R.id.imageReceipt);
-            itemView.setOnClickListener(this);
+            viewDevider = itemView.findViewById(R.id.last_item_divider);
+
+
         }
 
         @Override

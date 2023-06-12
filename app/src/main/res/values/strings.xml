@@ -19,4 +19,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="nav_introduce_recipe_string">Обзор рецепта</string>
     <string name="nav_add_products_string">Добавление продуктов</string>
+    <string name="tab_title_recipes_all">Все рецепты</string>
+    <string name="tab_title_recipe_available">Доступные</string>
 </resources>
