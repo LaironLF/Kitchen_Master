@@ -74,6 +74,7 @@ public class  ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter
             RecipeImage = itemView.findViewById(R.id.imageReceipt);
             ReceiptTime = itemView.findViewById(R.id.tv_receiptTime);
             viewDevider = itemView.findViewById(R.id.last_item_divider);
+            itemView.setOnClickListener(this);
 
 
 
