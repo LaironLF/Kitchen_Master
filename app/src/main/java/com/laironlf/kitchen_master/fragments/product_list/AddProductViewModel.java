@@ -1,4 +1,4 @@
-package com.laironlf.kitchen_master.ui.productList;
+package com.laironlf.kitchen_master.fragments.product_list;
 
 
 import android.util.Log;

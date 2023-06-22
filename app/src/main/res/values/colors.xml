@@ -23,6 +23,7 @@
     <attr name="titleItemTextColor" format="color"/>
     <attr name="textColorRecipeStats" format="color"/>
     <attr name="tagBorderColor" format="color"/>
+    <attr name="windowBackgroundColor" format="color"/>
 
 
 </resources>

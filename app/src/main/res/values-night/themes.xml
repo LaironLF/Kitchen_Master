@@ -20,6 +20,7 @@
         <item name="titleItemTextColor">@color/itemBlockColorDay</item>
         <item name="textColorRecipeStats">@color/itemBlockColorDay</item>
         <item name="tagBorderColor">@color/grey_dark</item>
+        <item name="windowBackgroundColor">@color/night_back</item>
 
 <!--        <item name="android:windowTranslucentStatus">true</item>-->
 <!--        <item name="android:windowTranslucentNavigation">true</item>-->

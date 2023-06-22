@@ -1,18 +1,15 @@
-package com.laironlf.kitchen_master.ui.home;
+package com.laironlf.kitchen_master.fragments.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.bumptech.glide.Glide;
-import com.laironlf.kitchen_master.R;
 import com.laironlf.kitchen_master.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {

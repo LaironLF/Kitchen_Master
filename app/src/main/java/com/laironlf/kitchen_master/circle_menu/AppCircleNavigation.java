@@ -118,6 +118,10 @@ public class AppCircleNavigation {
     }
 
     // --------------------------------------------------------
+
+    public static Menu getMenu(){
+        return menu;
+    }
     public static void openDrawer(){
         drawerLayout.openDrawer(GravityCompat.START);
     }

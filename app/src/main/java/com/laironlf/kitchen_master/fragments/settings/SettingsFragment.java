@@ -1,4 +1,4 @@
-package com.laironlf.kitchen_master.ui.User;
+package com.laironlf.kitchen_master.fragments.settings;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,24 +14,24 @@ import android.view.ViewGroup;
 
 import com.laironlf.kitchen_master.R;
 
-public class UserFragment extends Fragment {
+public class SettingsFragment extends Fragment {
 
-    private UserViewModel mViewModel;
+    private SettingsViewModel mViewModel;
 
-    public static UserFragment newInstance() {
-        return new UserFragment();
+    public static SettingsFragment newInstance() {
+        return new SettingsFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_user, container, false);
+        return inflater.inflate(R.layout.fragment_settings, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
         // TODO: Use the ViewModel
     }
 

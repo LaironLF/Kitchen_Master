@@ -1,4 +1,4 @@
-package com.laironlf.kitchen_master.ui.User;
+package com.laironlf.kitchen_master.fragments.user;
 
 import androidx.lifecycle.ViewModel;
 

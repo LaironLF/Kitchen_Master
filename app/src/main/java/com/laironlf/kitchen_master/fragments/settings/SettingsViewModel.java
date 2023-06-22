@@ -1,4 +1,4 @@
-package com.laironlf.kitchen_master.ui.settings;
+package com.laironlf.kitchen_master.fragments.settings;
 
 import androidx.lifecycle.ViewModel;
 

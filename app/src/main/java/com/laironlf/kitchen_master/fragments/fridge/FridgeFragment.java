@@ -1,4 +1,4 @@
-package com.laironlf.kitchen_master.ui.Fridge;
+package com.laironlf.kitchen_master.fragments.fridge;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

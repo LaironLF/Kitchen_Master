@@ -1,5 +1,6 @@
-package com.laironlf.kitchen_master.ui.introduce_recipe;
+package com.laironlf.kitchen_master.fragments.introduce_recipe;
 
+import androidx.core.view.ViewCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +23,6 @@ import com.bumptech.glide.Glide;
 import com.laironlf.kitchen_master.R;
 import com.laironlf.kitchen_master.data_provider.IngredientsListAdapter;
 import com.laironlf.kitchen_master.databinding.FragmentIntroduceRecipeBinding;
-import com.laironlf.kitchen_master.ui.home.HomeViewModel;
 
 public class IntroduceRecipe extends Fragment {
 
@@ -50,9 +52,16 @@ public class IntroduceRecipe extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Transition transition = TransitionInflater.from(requireContext()).inflateTransition(R.transition.shared_image);
+        setSharedElementEnterTransition(transition);
+    }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ViewCompat.setTransitionName(imageView, "introduce_image");
     }
 
     private void InitializeIngredients() {

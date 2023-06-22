@@ -1,4 +1,4 @@
-package com.laironlf.kitchen_master.ui.home;
+package com.laironlf.kitchen_master.fragments.home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

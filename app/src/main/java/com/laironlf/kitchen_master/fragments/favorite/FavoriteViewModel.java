@@ -1,4 +1,4 @@
-package com.laironlf.kitchen_master.ui.Favorite;
+package com.laironlf.kitchen_master.fragments.favorite;
 
 import androidx.lifecycle.ViewModel;
 

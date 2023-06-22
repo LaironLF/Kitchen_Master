@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -74,9 +75,9 @@ public class  ReceiptListAdapter extends RecyclerView.Adapter<ReceiptListAdapter
             RecipeImage = itemView.findViewById(R.id.imageReceipt);
             ReceiptTime = itemView.findViewById(R.id.tv_receiptTime);
             viewDevider = itemView.findViewById(R.id.last_item_divider);
+
+            ViewCompat.setTransitionName(RecipeImage, "list_image");
             itemView.setOnClickListener(this);
-
-
 
         }
 

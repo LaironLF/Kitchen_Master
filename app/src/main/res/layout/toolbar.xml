@@ -22,7 +22,8 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
-    <RelativeLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:elevation="2dp"
         android:layout_width="0dp"
         android:layout_height="44dp"
@@ -36,13 +37,36 @@
         android:gravity="center">
 
         <TextView
-            android:layout_marginLeft="38dp"
             android:id="@+id/txt_menu"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
             android:text="example"
             android:textColor="@color/itemBlockColorDay"
-            android:textSize="18sp" />
-    </RelativeLayout>
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:id="@+id/et_search"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:background="@android:color/transparent"
+            android:drawableEnd="@drawable/edittext_selector"
+            android:drawableTint="@color/white"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="36dp"
+            android:paddingEnd="18dp"
+            tools:ignore="RtlSymmetry" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

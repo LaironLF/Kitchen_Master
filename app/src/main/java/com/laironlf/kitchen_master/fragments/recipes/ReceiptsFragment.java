@@ -1,12 +1,10 @@
-package com.laironlf.kitchen_master.ui.Recipes;
+package com.laironlf.kitchen_master.fragments.recipes;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,14 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
-import com.laironlf.kitchen_master.DB.Recipe;
 import com.laironlf.kitchen_master.R;
-import com.laironlf.kitchen_master.circle_menu.AppCircleNavigation;
 import com.laironlf.kitchen_master.data_provider.ReceiptListAdapter;
 import com.laironlf.kitchen_master.data_provider.RecipeDataMediator;
 import com.laironlf.kitchen_master.databinding.FragmentRecipesBinding;
-
-import java.util.ArrayList;
 
 public class ReceiptsFragment extends Fragment implements ReceiptListAdapter.OnRecipeClickListener{
 
@@ -99,7 +93,7 @@ public class ReceiptsFragment extends Fragment implements ReceiptListAdapter.OnR
     public void onRecipeClick(int i, View view, int recipeID) {
 //        Toast.makeText(getActivity().getApplicationContext(), "КЛИК", Toast.LENGTH_SHORT).show();
         RecipeDataMediator.setRecipe(recipeID);
-        Navigation.findNavController(view).navigate(R.id.action_nav_slideshow_to_introduceRecipe);
+        Navigation.findNavController(view).navigate(R.id.action_nav_recipes_to_introduceRecipe);
     }
 
 }

@@ -8,14 +8,14 @@
 <!--    Фрагменты навигации   -->
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.laironlf.kitchen_master.ui.home.HomeFragment"
+        android:name="com.laironlf.kitchen_master.fragments.home.HomeFragment"
         android:label="@string/nav_main_string"
         tools:layout="@layout/fragment_home" >
     </fragment>
 
     <fragment
         android:id="@+id/nav_products"
-        android:name="com.laironlf.kitchen_master.ui.Fridge.FridgeFragment"
+        android:name="com.laironlf.kitchen_master.fragments.fridge.FridgeFragment"
         android:label="@string/nav_fridge_string"
         tools:layout="@layout/fragment_fridge" >
         <action
@@ -25,41 +25,45 @@
 
     <fragment
         android:id="@+id/nav_recipes"
-        android:name="com.laironlf.kitchen_master.ui.Recipes.ReceiptsFragment"
+        android:name="com.laironlf.kitchen_master.fragments.recipes.ReceiptsFragment"
         android:label="@string/nav_recipes_string"
         tools:layout="@layout/fragment_recipes" >
         <action
-            android:id="@+id/action_nav_slideshow_to_introduceRecipe"
-            app:destination="@id/introduceRecipe" />
+            android:id="@+id/action_nav_recipes_to_introduceRecipe"
+            app:destination="@id/introduceRecipe"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="com.laironlf.kitchen_master.ui.settings.SettingsFragment"
+        android:name="com.laironlf.kitchen_master.fragments.settings.SettingsFragment"
         android:label="@string/nav_settings_string"
         tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/nav_favorite"
-        android:name="com.laironlf.kitchen_master.ui.Favorite.FavoriteFragment"
+        android:name="com.laironlf.kitchen_master.fragments.favorite.FavoriteFragment"
         android:label="@string/nav_favorite_string"
         tools:layout="@layout/fragment_favorite" />
 
     <fragment
         android:id="@+id/nav_user"
-        android:name="com.laironlf.kitchen_master.ui.User.UserFragment"
+        android:name="com.laironlf.kitchen_master.fragments.user.UserFragment"
         android:label="@string/nav_user_string"
         tools:layout="@layout/fragment_user" />
 
 <!--    Остальные фрагменты   -->
     <fragment
         android:id="@+id/products"
-        android:name="com.laironlf.kitchen_master.ui.productList.AddProductFragment"
+        android:name="com.laironlf.kitchen_master.fragments.product_list.AddProductFragment"
         android:label="@string/nav_add_products_string"
         tools:layout="@layout/fragment_addproducts" />
     <fragment
         android:id="@+id/introduceRecipe"
-        android:name="com.laironlf.kitchen_master.ui.introduce_recipe.IntroduceRecipe"
+        android:name="com.laironlf.kitchen_master.fragments.introduce_recipe.IntroduceRecipe"
         android:label="@string/nav_introduce_recipe_string"
         tools:layout="@layout/fragment_introduce_recipe" />
 </navigation>
