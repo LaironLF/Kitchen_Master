@@ -10,15 +10,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
-            android:layout_marginTop="100dp"
             android:id="@+id/imageView123"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_foreground"
-            android:tint="#FFE07A5F"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#FFE07A5F" />
 
         <TextView
             android:layout_width="match_parent"

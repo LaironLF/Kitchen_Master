@@ -48,22 +48,67 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:textCursorDrawable="@drawable/edittext_cursor"
-            android:id="@+id/et_search"
-            android:visibility="visible"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="invisible"
             android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:drawableTint="@color/white"
+                android:focusable="true"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="36dp"
+                android:paddingEnd="18dp"
+                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:visibility="visible"
+                app:layout_constraintEnd_toStartOf="@+id/calc_clear_txt_Prise"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="Autofill,LabelFor,RtlSymmetry" />
+
+            <ImageButton
+                android:id="@+id/calc_clear_txt_Prise"
+                app:layout_constraintDimensionRatio="1:1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end|center_vertical"
+                android:background="@drawable/ripple_circle"
+                android:src="@drawable/ic_baseline_clear_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/white" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <ImageButton
+            android:visibility="visible"
+            android:id="@+id/btn_start_search"
+            app:layout_constraintDimensionRatio="1:1"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:focusable="false"
             android:background="@android:color/transparent"
-            android:drawableEnd="@drawable/edittext_selector"
-            android:drawableTint="@color/white"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:maxLines="1"
-            android:paddingStart="36dp"
-            android:paddingEnd="18dp"
-            tools:ignore="RtlSymmetry" />
+            android:src="@drawable/ic_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/white"
+            tools:ignore="ContentDescription" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:alpha="0.15"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_start_search"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
