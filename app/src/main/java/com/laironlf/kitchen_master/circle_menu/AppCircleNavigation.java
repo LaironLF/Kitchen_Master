@@ -300,7 +300,8 @@ public class AppCircleNavigation {
 
             for(int i = 0; i < params.size(); i++){
 
-                params.get(i).circleAngle = iconPos[i] - (iconPos[i] - iconPos[i]*slideOffset);
+
+                params.get(i).circleAngle = iconPos[i] - ((270 - iconPos[i])*(1 - slideOffset));
                 radioButtonGroup.getRadioButtonViews().get(i).setLayoutParams(params.get(i));
             }
 
